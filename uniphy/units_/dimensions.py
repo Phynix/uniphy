@@ -37,6 +37,8 @@ class Dimensions(OrderedEnum):
 
 
 class DimensionError(Exception):
+    '''ErrorClass for operations that make physically no sense because of the
+    dimensions.'''
     def __init__(self, message):
         # Call the base class constructor with the parameters it needs
         super(DimensionError, self).__init__(message)

@@ -3,7 +3,7 @@
 from dimensions import Dimensions
 
 
-class _SIUnit():
+class SIUnit():
     __slots__ = (
         '_unit_name',
         '_dimension',
@@ -27,6 +27,3 @@ class _SIUnit():
 
     def __repr__(self):
         return type(self)(self.unit_name, self.dimension)
-
-
-
