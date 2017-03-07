@@ -1,15 +1,15 @@
 import unittest
-from units import BaseUnit, Dimension, Dimensions, DimensionError
+from units import _SIUnit, Dimensions, DimensionError
 
 
-class TestBaseUnit(unittest.TestCase):
+class Test_SIUnit(unittest.TestCase):
 
     def setUp(self):
         dimension = Dimension(Dimensions.LENGTH)
-        self.test_unit = BaseUnit('test_unit', dimension)
+        self.test_unit = _SIUnit('test_unit', dimension)
 
     def test_constructor(self):
-        BaseUnit('test_unit', Dimension(Dimensions.LENGTH))
+        _SIUnit('test_unit', Dimension(Dimensions.LENGTH))
 
     def test_set_unit_name(self):
         with self.assertRaises(AttributeError):
@@ -27,40 +27,40 @@ class TestBaseUnit(unittest.TestCase):
         with self.assertRaises(AttributeError):
             del self.test_unit.dimension
 
-    def test_add_with_BaseUnit_same_dimension_same_unit(self):
-        other = BaseUnit('test_unit', self.test_unit.dimension)
+    def test_add_with__SIUnit_same_dimension_same_unit(self):
+        other = _SIUnit('test_unit', self.test_unit.dimension)
         result = self.test_unit + other
         expected_multiplier = self.test_unit._multiplier + other._multiplier
         self.assertEqual(result._multiplier, expected_multiplier)
 
-    def test_add_with_BaseUnit_different_dimension(self):
+    def test_add_with__SIUnit_different_dimension(self):
         different_dimension = Dimension(Dimensions.AMOUNT_OF_SUBSTANCE)
         self.assertIsNot(self.test_unit.dimension, different_dimension)
-        other = BaseUnit('some_unit', different_dimension)
+        other = _SIUnit('some_unit', different_dimension)
         with self.assertRaises(DimensionError):
             self.test_unit + other
 
-    def test_radd_with_BaseUnit_same_dimension_same_unit(self):
-        other = BaseUnit('test_unit', self.test_unit.dimension)
+    def test_radd_with__SIUnit_same_dimension_same_unit(self):
+        other = _SIUnit('test_unit', self.test_unit.dimension)
         result = other + self.test_unit
         expected_multiplier = self.test_unit._multiplier + other._multiplier
         self.assertEqual(result._multiplier, expected_multiplier)
 
-    def test_radd_with_BaseUnit_different_dimension(self):
+    def test_radd_with__SIUnit_different_dimension(self):
         different_dimension = Dimension(Dimensions.AMOUNT_OF_SUBSTANCE)
         self.assertIsNot(self.test_unit.dimension, different_dimension)
-        other = BaseUnit('some_unit', different_dimension)
+        other = _SIUnit('some_unit', different_dimension)
         with self.assertRaises(DimensionError):
             other + self.test_unit
 
     def test_sub_same_dimension_same_unit(self):
-        other = BaseUnit('test_unit', self.test_unit.dimension)
+        other = _SIUnit('test_unit', self.test_unit.dimension)
         result = self.test_unit - other
         expected_multiplier = self.test_unit._multiplier - other._multiplier
         self.assertEqual(result._multiplier, expected_multiplier)
 
     def test_mul_unit(self):
-        other = BaseUnit('some_unit', self.test_unit.dimension)
+        other = _SIUnit('some_unit', self.test_unit.dimension)
         result = self.test_unit * other
         expected_multiplier = self.test_unit._multiplier * other._multiplier
         expected_unit_name = self.test_unit.unit_name + '*' + other.unit_name
