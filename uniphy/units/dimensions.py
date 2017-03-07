@@ -34,3 +34,9 @@ class Dimensions(OrderedEnum):
     THERMODYNAMIC_TEMPERATURE = 4
     AMOUNT_OF_SUBSTANCE = 5
     LUMINOUS_INTENSITY = 6
+
+
+class DimensionError(Exception):
+    def __init__(self, message):
+        # Call the base class constructor with the parameters it needs
+        super(DimensionError, self).__init__(message)
