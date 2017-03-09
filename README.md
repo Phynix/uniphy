@@ -12,4 +12,4 @@ The core class will be called **Unit** with the following attributes and feature
   * Forbidden operations like addition of units with differing dimension.
   * A subclass RangedUnit with max and min values.
 
-A first demo is hoped to be released next summer.
+Input and feedback is very welcome and can be posted as an issue. A first demo is hoped to be released next summer.
