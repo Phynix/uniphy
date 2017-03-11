@@ -12,7 +12,7 @@ before_install:
 install:
 - sudo -E -H pip install -U -r requirements.txt
 - pip install . --no-dependencies
-script:
+# script:
 # run tests
 deploy:
   provider: pypi
