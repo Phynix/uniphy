@@ -12,8 +12,8 @@ before_install:
 install:
 - sudo -E -H pip install -U -r requirements.txt
 - pip install . --no-dependencies
-# script:
-# run tests
+script:
+ - echo "no tests"
 deploy:
   provider: pypi
   user: phynix
