@@ -1,6 +1,6 @@
 strictness: medium
-pylint:
-  disable:
+#pylint:
+#  disable:
 #    - too-many-arguments
 #    - too-many-statements
 #    - too-many-locals
@@ -16,6 +16,3 @@ pep8:
   
 doc-warnings: true
 max-line-length: 110
-
-
-
