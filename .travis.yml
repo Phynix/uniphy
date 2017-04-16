@@ -7,10 +7,10 @@ python:
 #  system_site_packages: true
 before_install:
 - sudo apt-get -qq update
-- sudo -E -H pip install -U pip
+- pip install -U pip
 
 install:
-- sudo -E -H pip install -U -r requirements.txt
+- pip install -U -r requirements.txt
 - pip install . --no-dependencies
 script:
  - echo "no tests"
