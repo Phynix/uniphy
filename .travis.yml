@@ -1,0 +1,25 @@
+sudo: required
+dist: xenial
+language: python
+python:
+- '3.5'
+#virtualenv:
+#  system_site_packages: true
+before_install:
+- sudo apt-get -qq update
+- pip install -U pip
+
+install:
+- pip install -U -r requirements.txt
+- pip install . --no-dependencies
+script:
+ - echo "no tests"
+deploy:
+  provider: pypi
+  user: phynix
+  password:
+    # secure password for pip
+    secure: "l1RyZcmRd8yRCcAoB9xu2Za1qyrJC63MLl53l7TcfKhatYLPLRsw6oMXAUXCXmmh3giCxi6J6yfYQOmxq1b+bQjL/R8oddmA8YNO6yd0UU95VYeyPmcw7DU4X2eW4GuWNmKIZpr+x+/4ENM7/RINtQO6EUWYZ3XtU4lshTo7DB2uj6Eke2CAv7L/FCDxdtvWWeDtTuytn3KPo1ch9uheszM/9rKS9Jd8VPTIuOhIgcz+s7AxzmjnMx7/d08XpHz1X5RS0D98hE52EsDMGY+KI77suBUElBsSVGvfzQCY4xkAVKPkLqd+gDLFkMun5S6oScDHfRNcPGMhDcfwjRpWrrWrFXYOx7to0f1kMTlBGXU2H8ZW15i90BwAF9HmOXuo58J54aZg/zKFCtShts/uWptzPIA40ivE1/tAAgt4+vrXcLq2w3wudo8c8TA6ljgBTLvy05nARHeEA70FJbNj3w5Xw2cQJ03SK8cYiq1/E2f7eYfY1ag3Yakm6lYZ9TNxCuXbC2vm8ClfyGYMf0DA50n62dnenSJeYPJ6kO5rGfa/goLs0J2d3fk8++XxTe+d71e2EgedSEwEjI/KXef1Ub/kQob0JZpwmC+Vo6NTuttcKLLkWDr81Ywq3d6zMZoGQQ/1bw94/S3wtynIPsHWeQhXmCNN8tTR65/sb7H7das="
+  distributions: sdist bdist_wheel
+  on:
+    branch: master
