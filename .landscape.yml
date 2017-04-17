@@ -1,10 +1,18 @@
 strictness: medium
-pylint:
+#pylint:
 #  disable:
 #    - too-many-arguments
 #    - too-many-statements
 #    - too-many-locals
 #    - too-many-branches
 
+ignore-paths:
+  - docs/conf.py
 python-targets:
  - 3
+ 
+pep8:
+  full: true
+  
+doc-warnings: true
+max-line-length: 110
