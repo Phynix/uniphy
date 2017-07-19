@@ -1,13 +1,45 @@
-sudo: required
-dist: xenial
 language: python
+
+#dist: trusty
+os:
+ - linux
+
+#sudo: required
+sudo: false
+
 python:
-- '3.5'
+ - '3.4'
+ - '3.5'
+ - '3.6'
+ 
+matrix:
+ include:
+  - os: osx
+    python: '3.6'
+    
 #virtualenv:
 #  system_site_packages: true
 before_install:
-- sudo apt-get -qq update
-- pip install -U pip
+##- sudo apt-get -qq update
+#- pip install -U pip
+
+# install anaconda
+- if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
+      wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O anaconda.sh;
+    else
+      wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O anaconda.sh;
+  fi
+- bash anaconda.sh -b -p $HOME/anaconda
+- export PATH="$HOME/anaconda/bin:$PATH"
+- hash -r
+- conda config --set always_yes yes --set changeps1 no
+- conda update -q conda
+- conda update anaconda -y
+
+# create conda environment
+- conda create -n uniphy_env python=$TRAVIS_PYTHON_VERSION
+- source activate uniphy_env
+
 
 install:
 - pip install -U -r requirements.txt

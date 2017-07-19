@@ -1,16 +1,21 @@
----
+
 engines:
   duplication:
     enabled: true
     config:
       languages:
-      - python
+        python:
+          python_version: 3
   fixme:
     enabled: true
   radon:
     enabled: true
     config: 
       python_version: 3
+  pep8:
+    enabled: true
+  git-legal:
+    enabled: true
 ratings:
   paths:
   - "**.py"
