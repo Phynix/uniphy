@@ -34,7 +34,7 @@ before_install:
 - hash -r
 - conda config --set always_yes yes --set changeps1 no
 - conda update -q conda
-- conda update anaconda -y
+- conda update conda -y
 
 # create conda environment
 - conda create -n uniphy_env python=$TRAVIS_PYTHON_VERSION
