@@ -25,10 +25,10 @@ before_install:
 
 # install anaconda
 
-- if [[ "$TRAVIS_OS_NAME" == "linux"]]; then
-      wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O anaconda.sh;
-  elif [[ "$TRAVIS_OS_NAME" == "osx"]];
-      wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh;
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+        wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O anaconda.sh;
+    elif [[ "$TRAVIS_OS_NAME" == "osx" ]]
+        wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O anaconda.sh;
   fi
   
 - bash anaconda.sh -b -p $HOME/anaconda
