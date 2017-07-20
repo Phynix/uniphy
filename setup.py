@@ -22,7 +22,7 @@ def readme():
 
 setup(name='uniphy',
       version='0.0.1',  # TODO: automatise versioning
-      description='Unification and collection of algorithms used in physics',
+      description='Unification and collection of algorithms used in physics and science',
       long_description=readme(),
       classifiers=[
         'Development Status :: 1 - Planning',
@@ -30,25 +30,28 @@ setup(name='uniphy',
         'License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)',
         'Natural Language :: English',
         'Operating System :: MacOS',
-        'Operating System :: MacOS :: MacOS 9',
         'Operating System :: MacOS :: MacOS X',
         'Operating System :: POSIX :: Linux',
         'Operating System :: Unix',
+        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3 :: Only',
         'Programming Language :: Python :: Implementation :: CPython',
         'Topic :: Scientific/Engineering :: Physics',
         'Topic :: Scientific/Engineering :: Information Analysis',
         'Topic :: Scientific/Engineering :: Mathematics'
       ],
-      keywords='physics, analysis, algorithm',
+      keywords='physics, analysis, algorithm, output',
       url='https://github.com/Phynix/uniphy',
       author='Jonas Eschle',
       author_email='mayou36@jonas.eschle.com',
       license='GNU Lesser General Public License v3',
 #      dependency_links="",
       install_requires=requirements,
-#      extras_require=,
+      extras_require={
+                      'units': ['numpy']
+                     },
       packages=['uniphy'],
       include_package_data=True,
       zip_safe=False
