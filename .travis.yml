@@ -17,7 +17,6 @@ matrix:
  include:
   - language: python
   - os: osx
-  - python: '3.4'
 #  - MAYOU_PYTHON_VERSION="3.6"
   
 #if [[ "$MAYOU_PYTHON_VERSION" != ""]]; then
@@ -36,7 +35,9 @@ before_install:
 
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
         wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O anaconda.sh;
+        MAYOU_PYTHON_VERSION=$TRAVIS_PYTHON_VERSION
     elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+        MAYOU_PYTHON_VERSION="3.6"
         wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O anaconda.sh;
   fi
   
@@ -48,7 +49,7 @@ before_install:
 - conda update conda -y
 
 # create conda environment
-- conda create -n uniphy_env python=$TRAVIS_PYTHON_VERSION
+- conda create -n uniphy_env python=$MAYOU_PYTHON_VERSION
 - source activate uniphy_env
 
 
