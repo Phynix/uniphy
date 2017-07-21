@@ -14,8 +14,8 @@ python:
  
 matrix:
  include:
+  - language: generic
   - os: osx
-    python: '3.5'
     
 #virtualenv:
 #  system_site_packages: true
