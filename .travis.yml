@@ -6,6 +6,7 @@ os:
 
 #sudo: required
 sudo: false
+MAYOU_PYTHON_VERSION=""
 
 python:
  - '3.4'
@@ -16,6 +17,13 @@ matrix:
  include:
   - language: generic
   - os: osx
+  - MAYOU_PYTHON_VERSION="3.6"
+  
+if [[ "$MAYOU_PYTHON_VERSION" != ""]]; then
+TRAVIS_PYTHON_VERSION="$MAYOU_PYTHON_VERSION";
+fi
+ 
+  
     
 #virtualenv:
 #  system_site_packages: true
