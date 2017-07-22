@@ -1,0 +1,54 @@
+os: linux
+sudo: required
+language: python
+python:
+ - '3.4'
+ - '3.5'
+ - '3.6'
+ 
+matrix:
+ include:
+  - os: osx
+  - language: generic
+  
+before_install:
+
+# install anaconda
+
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+        wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O anaconda.sh;
+        MAYOU_PYTHON_VERSION=$TRAVIS_PYTHON_VERSION;
+    elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+        MAYOU_PYTHON_VERSION="3.6";
+        wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O anaconda.sh;
+  fi
+  
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install graphviz; fi
+  
+- bash anaconda.sh -b -p $HOME/anaconda
+- export PATH="$HOME/anaconda/bin:$PATH"
+- hash -r
+- conda config --set always_yes yes --set changeps1 no
+- conda update -q conda
+- conda update conda -y
+
+# create conda environment
+- conda create -n uniphy_env python=$MAYOU_PYTHON_VERSION
+- source activate uniphy_env
+
+
+install:
+- pip install -U -r requirements.txt
+- pip install . --no-dependencies
+script:
+ - echo "no tests"
+deploy:
+  provider: pypi
+  user: phynix
+  password:
+    # secure password for pip
+    secure: "l1RyZcmRd8yRCcAoB9xu2Za1qyrJC63MLl53l7TcfKhatYLPLRsw6oMXAUXCXmmh3giCxi6J6yfYQOmxq1b+bQjL/R8oddmA8YNO6yd0UU95VYeyPmcw7DU4X2eW4GuWNmKIZpr+x+/4ENM7/RINtQO6EUWYZ3XtU4lshTo7DB2uj6Eke2CAv7L/FCDxdtvWWeDtTuytn3KPo1ch9uheszM/9rKS9Jd8VPTIuOhIgcz+s7AxzmjnMx7/d08XpHz1X5RS0D98hE52EsDMGY+KI77suBUElBsSVGvfzQCY4xkAVKPkLqd+gDLFkMun5S6oScDHfRNcPGMhDcfwjRpWrrWrFXYOx7to0f1kMTlBGXU2H8ZW15i90BwAF9HmOXuo58J54aZg/zKFCtShts/uWptzPIA40ivE1/tAAgt4+vrXcLq2w3wudo8c8TA6ljgBTLvy05nARHeEA70FJbNj3w5Xw2cQJ03SK8cYiq1/E2f7eYfY1ag3Yakm6lYZ9TNxCuXbC2vm8ClfyGYMf0DA50n62dnenSJeYPJ6kO5rGfa/goLs0J2d3fk8++XxTe+d71e2EgedSEwEjI/KXef1Ub/kQob0JZpwmC+Vo6NTuttcKLLkWDr81Ywq3d6zMZoGQQ/1bw94/S3wtynIPsHWeQhXmCNN8tTR65/sb7H7das="
+  distributions: sdist bdist_wheel
+  on:
+    branch: master
