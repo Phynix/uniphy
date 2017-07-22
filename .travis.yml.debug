@@ -1,0 +1,16 @@
+os: linux
+sudo: false
+#language: python
+python:
+ - '3.4'
+ - '3.5'
+ - '3.6'
+ 
+matrix:
+ include:
+  - os: osx
+  - language: ruby
+  
+script:
+ - echo "no tests"
+
