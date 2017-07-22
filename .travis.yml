@@ -9,7 +9,7 @@ python:
 matrix:
  include:
   - os: osx
-  - language: ruby
+    language: generic
   
 before_install:
 
