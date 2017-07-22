@@ -15,8 +15,8 @@ python:
  
 matrix:
  include:
-  - language: python
   - os: osx
+  - language: generic
 #  - MAYOU_PYTHON_VERSION="3.6"
   
 #if [[ "$MAYOU_PYTHON_VERSION" != ""]]; then
