@@ -23,11 +23,11 @@ before_install:
         wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O anaconda.sh;
   fi
   
-- echo $TRAVIS_OS_NAME
-- echo $MAYOU_PYTHON_VERSION
+#- echo $TRAVIS_OS_NAME
+##- echo $MAYOU_PYTHON_VERSION
   
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install graphviz; fi
+#- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
+#- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install graphviz; fi
   
 - bash anaconda.sh -b -p $HOME/anaconda
 - export PATH="$HOME/anaconda/bin:$PATH"
