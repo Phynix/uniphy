@@ -1,6 +1,6 @@
 os: linux
 sudo: false
-language: python
+#language: python
 python:
  - '3.4'
  - '3.5'
