@@ -35,7 +35,7 @@ failures2 = [
         ]
 
 
-class type_checked_test(unittest.TestCase):
+class TypeCheckedTest(unittest.TestCase):
 
     def test_return_correct(self):
         """Raise no exception when return type is correct."""
