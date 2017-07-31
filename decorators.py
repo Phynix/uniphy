@@ -12,6 +12,25 @@ from functools import wraps
 
 
 def type_checked(func):
+    '''Decorator for dynamic type checking with annotations.
+
+    + Each Parameter and the return value can be annotated with one \
+    expression of <class 'type'>.
+    + Other expressions or missing annotations are ignored.
+    + Default values are type checked once the decorator is used. All other \
+    annotations are checked once per function call.
+    + Annotations for *args and **kwargs are ignored.
+
+    Parameters
+    ----------
+    func : <class 'function'>
+        Function to be type checked.
+
+    Returns
+    -------
+    wrapper : <class 'function'>
+        Decorated function.
+    '''
 
     def is_suitable_annotation(annotation):
         '''Checks wether annotation is specified and is a type.
