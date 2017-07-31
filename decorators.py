@@ -76,5 +76,5 @@ def type_checked(func):
 
 if __name__ == '__main__':
     import unittest
-    from decorators_test import type_checked_test
+    from test_decorators import type_checked_test
     unittest.main()
