@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectCodeStyleSettingsManager">
+    <option name="PER_PROJECT_SETTINGS">
+      <value>
+        <option name="ALIGN_MULTILINE_PARAMETERS_IN_CALLS" value="true" />
+        <Python>
+          <option name="SPACE_AROUND_POWER_OPERATOR" value="false" />
+          <option name="DICT_ALIGNMENT" value="2" />
+        </Python>
+        <codeStyleSettings language="Python">
+          <option name="SPACE_AROUND_MULTIPLICATIVE_OPERATORS" value="false" />
+          <indentOptions>
+            <option name="SMART_TABS" value="true" />
+          </indentOptions>
+        </codeStyleSettings>
+      </value>
+    </option>
+    <option name="PREFERRED_PROJECT_CODE_STYLE" value="Default" />
+  </component>
+</project>
