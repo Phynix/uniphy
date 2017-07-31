@@ -104,7 +104,7 @@ class TestTypeChecked(unittest.TestCase):
                 pass
 
     def test_works_with_args_kwargs(self):
-        '''TODO: Define behaviour when *args and **kwargs are beeing used.'''
+        # TODO: Define behaviour when *args and **kwargs are beeing used.
         @decorators.type_checked
         def test_func(*args: int, **kwargs: int):
             pass
