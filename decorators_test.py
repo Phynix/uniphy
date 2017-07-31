@@ -38,12 +38,14 @@ failures2 = [
 class type_checked_test(unittest.TestCase):
 
     def test_return_correct(self):
+        """Raise no exception when return type is correct."""
         @decorators.type_checked
         def a() -> int:
             return 1
         a()
 
     def test_return_incorrect(self):
+        '''Raise Type when return type incorrect.'''
         @decorators.type_checked
         def a() -> int:
             return "hello"
@@ -51,6 +53,7 @@ class type_checked_test(unittest.TestCase):
             a()
 
     def test_not_type_annotation(self):
+        """Test that annotations that are not a type are beeing ignored."""
         test_func1(1, b=1)
 
     def test_only_positional_no_defaults_correct_arguments(self):
@@ -87,18 +90,21 @@ class type_checked_test(unittest.TestCase):
             test_func2(a=1, b=1)
 
     def test_keep_annotation_metadata(self):
+        """Test that annotation metadata is not influenced."""
         def a(a: int=2):
             pass
         b = decorators.type_checked(a)
         self.assertEqual(a.__annotations__, b.__annotations__)
 
     def test_wrong_default_arguments(self):
+        '''Test if wrong default arguments raise TypeError at function definition.'''
         with self.assertRaises(TypeError):
             @decorators.type_checked
             def test_func(a: int="hello"):
                 pass
 
     def test_works_with_args_kwargs(self):
+        '''ToDo: Define behaviour when *args and **kwargs are beeing used.'''
         @decorators.type_checked
         def test_func(*args: int, **kwargs: int):
             pass
