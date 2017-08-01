@@ -30,6 +30,9 @@ def type_checked(func):
         Decorated function.
     """
 
+    # *args, **kwargs are ignored.
+    ALLOWED_PARAMETER_KINDS = (Parameter.POSITIONAL_ONLY, Parameter.KEYWORD_ONLY, Parameter.POSITIONAL_OR_KEYWORD)
+
     def is_suitable_annotation(annotation):
         """Checks wether annotation is specified and is a type.
 
@@ -57,8 +60,9 @@ def type_checked(func):
 
         # Check type of positional and keyword arguments.
         for arg_name, value in all_args.items():
-            annotation = parameters[arg_name].annotation
-            if is_suitable_annotation(annotation) and not isinstance(value, annotation):
+            parameter = parameters[arg_name]
+            annotation = parameter.annotation
+            if (parameter.kind in ALLOWED_PARAMETER_KINDS and is_suitable_annotation(annotation) and not isinstance(value, annotation)):
                 msg = 'argument {}={} is not instance of {}'
                 raise TypeError(msg.format(arg_name, value, annotation))
 
