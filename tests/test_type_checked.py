@@ -7,7 +7,7 @@ Created on Sat Jul 29 00:15:42 2017
 """
 
 import unittest
-import decorators
+from uniphy import decorators
 
 
 @decorators.type_checked

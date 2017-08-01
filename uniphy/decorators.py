@@ -7,8 +7,8 @@ Created on Tue Jul 25 23:05:04 2017
 """
 
 import inspect
-from inspect import Parameter
 from functools import wraps
+from inspect import Parameter
 
 
 def type_checked(func):
@@ -74,9 +74,3 @@ def type_checked(func):
         return result
 
     return wrapper
-
-
-if __name__ == '__main__':
-    import unittest
-    from test_decorators import TestTypeChecked
-    unittest.main()
