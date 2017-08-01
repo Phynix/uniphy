@@ -34,7 +34,7 @@ failures2 = [
         {'a': 1, 'b': 1, 'c': 1, 'd': 1},  # both annotations wrong
         ]
 
-
+# TODO: Test type checked for bound methods.
 class TestTypeChecked(unittest.TestCase):
 
     def test_return_correct(self):
