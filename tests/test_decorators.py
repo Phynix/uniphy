@@ -3,7 +3,7 @@
 """
 Created on Sat Jul 29 00:15:42 2017
 
-@author: johannes
+@author: Johannes Lade
 """
 
 import unittest

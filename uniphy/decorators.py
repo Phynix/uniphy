@@ -3,7 +3,7 @@
 """
 Created on Tue Jul 25 23:05:04 2017
 
-@author: johannes
+@author: Johannes Lade, Jonas Eschle 'Mayou36'
 """
 
 import inspect
@@ -17,7 +17,8 @@ def type_checked(func):
 
     + Each Parameter and the return value can be annotated with one expression of <class 'type'>.
     + Other expressions or missing annotations are ignored.
-    + Default values are type checked once the decorator is used. All other annotations are checked once per function call.
+    + Default values are type checked once the decorator is used for the first time.
+    + All other annotations are checked once per function call.
     + Annotations for *args and **kwargs are ignored.
 
     Parameters
