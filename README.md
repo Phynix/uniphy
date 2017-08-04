@@ -33,20 +33,3 @@ OR
 out = up.output("/my/path/to/folder")
 out.print("Same as print again, but will be saved this time")
 ```
-
-
-
-
-### Units
-
-The first project just started is the package called **uniphy.units**. It's goal is to create a possiblity to conveniently handle physical units in python.
-The core class will be called **Unit** with the following attributes and features:
-  * Name: A unit has a name like "J" or "Angstroem".
-  * Description: An optional description.
-  * Dimension: The dimension in lenght, mass, etc.
-  * Value: The value of the unit.
-  * Transaltion Factor: Factor to translate into SI units.
-  * Forbidden operations like addition of units with differing dimension.
-  * A subclass RangedUnit with max and min values.
-
-Input and feedback is very welcome and can be posted as an issue. A first demo is hoped to be released next summer.
