@@ -30,7 +30,6 @@ def type_checked(func):
     wrapper : callable
         Decorated function.
     """
-
     # *args, **kwargs are ignored.
     ALLOWED_PARAMETER_KINDS = (
         Parameter.POSITIONAL_ONLY,
