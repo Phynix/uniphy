@@ -11,7 +11,7 @@ from uniphy import decorators
 
 
 @decorators.type_checked
-def test_func1(a: int, b: "nonsene", c: 1*1 = list()) -> (1, 'hala'):
+def test_func1(a: int, b: "nonsene", c: 1*1 = "hello") -> (1, 'hala'):
     pass
 
 
