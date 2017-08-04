@@ -38,7 +38,8 @@ failures2 = [
 class TestTypeChecked(unittest.TestCase):
     # TODO: Test type checked for bound methods.
 
-    def test_return_correct(self):
+    @staticmethod
+    def test_return_correct():
         """Raise no exception when return type is correct."""
 
         @decorators.type_checked
@@ -48,7 +49,7 @@ class TestTypeChecked(unittest.TestCase):
         a()
 
     def test_return_incorrect(self):
-        '''Raise Type when return type incorrect.'''
+        """Raise Type when return type incorrect."""
 
         @decorators.type_checked
         def a() -> int:
@@ -57,11 +58,13 @@ class TestTypeChecked(unittest.TestCase):
         with self.assertRaises(TypeError):
             a()
 
-    def test_not_type_annotation(self):
+    @staticmethod
+    def test_not_type_annotation():
         """Test that annotations that are not a type are beeing ignored."""
         test_func1(1, b=1)
 
-    def test_only_positional_no_defaults_correct_arguments(self):
+    @staticmethod
+    def test_only_positional_no_defaults_correct_arguments():
         test_func2(*correct1)
 
     def test_only_positional_no_defaults_wrong_arguments(self):
@@ -69,14 +72,16 @@ class TestTypeChecked(unittest.TestCase):
             with self.assertRaises(TypeError):
                 test_func2(*failure)
 
-    def test_only_positional_with_defaults_correct_arguments(self):
+    @staticmethod
+    def test_only_positional_with_defaults_correct_arguments():
         test_func2(*correct1[:2])
 
     def test_only_positional_with_defaults_wrong_arguments(self):
         with self.assertRaises(TypeError):
             test_func2(1, 1)
 
-    def test_only_kwarg_no_defaults_correct_arguments(self):
+    @staticmethod
+    def test_only_kwarg_no_defaults_correct_arguments():
         test_func2(**correct2)
 
     def test_only_kwarg_no_defaults_wrong_arguments(self):
@@ -84,7 +89,8 @@ class TestTypeChecked(unittest.TestCase):
             with self.assertRaises(TypeError):
                 test_func2(**failure)
 
-    def test_only_kwarg_with_defaults_correct_arguments(self):
+    @staticmethod
+    def test_only_kwarg_with_defaults_correct_arguments():
         correct = correct2.copy()
         del correct['c']
         del correct['d']
@@ -104,13 +110,14 @@ class TestTypeChecked(unittest.TestCase):
         self.assertEqual(a.__annotations__, b.__annotations__)
 
     def test_wrong_default_arguments(self):
-        '''Test if wrong default arguments raise TypeError at function definition.'''
+        """Test if wrong default arguments raise TypeError at function definition."""
         with self.assertRaises(TypeError):
             @decorators.type_checked
             def test_func(a: int = "hello"):
                 pass
 
-    def test_works_with_args_kwargs(self):
+    @staticmethod
+    def test_works_with_args_kwargs():
         """Test that *args and **kwargs are ignored."""
 
         @decorators.type_checked

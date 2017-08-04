@@ -32,14 +32,19 @@ def type_checked(func):
     """
 
     # *args, **kwargs are ignored.
-    ALLOWED_PARAMETER_KINDS = (Parameter.POSITIONAL_ONLY, Parameter.KEYWORD_ONLY, Parameter.POSITIONAL_OR_KEYWORD)
+    ALLOWED_PARAMETER_KINDS = (
+        Parameter.POSITIONAL_ONLY,
+        Parameter.KEYWORD_ONLY,
+        Parameter.POSITIONAL_OR_KEYWORD
+    )
 
     def is_suitable_annotation(annotation):
         """Checks wether annotation is specified and is a type.
 
         This is supposed to prevent other python expressions in annotations
-        from crashing this decorator."""
-        return annotation is not Parameter.empty and type(annotation) is type
+        from crashing this decorator.
+        """
+        return annotation is not Parameter.empty and isinstance(annotation, type)
 
     signature = inspect.signature(func)
     parameters = signature.parameters
@@ -47,9 +52,9 @@ def type_checked(func):
     # Check type of default values.
     for parameter in parameters.values():
         if (parameter.default is not Parameter.empty
-                and parameter.default is not None
-                and is_suitable_annotation(parameter.annotation)
-                and not isinstance(parameter.default, parameter.annotation)):
+            and parameter.default is not None
+            and is_suitable_annotation(parameter.annotation)
+            and not isinstance(parameter.default, parameter.annotation)):
             msg = 'default argument {}={} is not instance of {}'
             raise TypeError(msg.format(parameter.name, parameter.default,
                                        parameter.annotation))
@@ -64,8 +69,8 @@ def type_checked(func):
             parameter = parameters[arg_name]
             annotation = parameter.annotation
             if (parameter.kind in ALLOWED_PARAMETER_KINDS
-                    and is_suitable_annotation(annotation)
-                    and not isinstance(value, annotation)):
+                and is_suitable_annotation(annotation)
+                and not isinstance(value, annotation)):
                 msg = 'argument {}={} is not instance of {}'
                 raise TypeError(msg.format(arg_name, value, annotation))
 
