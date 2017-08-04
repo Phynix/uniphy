@@ -47,12 +47,12 @@ def type_checked(func):
     # Check type of default values.
     for parameter in parameters.values():
         if (parameter.default is not Parameter.empty
-            and parameter.default is not None
-            and is_suitable_annotation(parameter.annotation)
-            and not isinstance(parameter.default, parameter.annotation)):
+                and parameter.default is not None
+                and is_suitable_annotation(parameter.annotation)
+                and not isinstance(parameter.default, parameter.annotation)):
             msg = 'default argument {}={} is not instance of {}'
             raise TypeError(msg.format(parameter.name, parameter.default,
-                                        parameter.annotation))
+                                       parameter.annotation))
 
     @wraps(func)
     def wrapper(*args, **kwargs):
@@ -63,7 +63,9 @@ def type_checked(func):
         for arg_name, value in all_args.items():
             parameter = parameters[arg_name]
             annotation = parameter.annotation
-            if (parameter.kind in ALLOWED_PARAMETER_KINDS and is_suitable_annotation(annotation) and not isinstance(value, annotation)):
+            if (parameter.kind in ALLOWED_PARAMETER_KINDS
+                    and is_suitable_annotation(annotation)
+                    and not isinstance(value, annotation)):
                 msg = 'argument {}={} is not instance of {}'
                 raise TypeError(msg.format(arg_name, value, annotation))
 
