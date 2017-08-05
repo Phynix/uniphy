@@ -2,16 +2,18 @@ sudo: required
 dist: xenial
 language: python
 python:
-- '3.5'
+  - '3.5'
 #virtualenv:
 #  system_site_packages: true
 before_install:
-- sudo apt-get -qq update
-- pip install -U pip
+  - sudo apt-get -qq update
+  - pip install -U pip
 
 install:
-- pip install -U -r requirements.txt
-- pip install . --no-dependencies
+  - pip install coverage
+
+  - pip install -U -r requirements.txt
+  - pip install . --no-dependencies
 script:
  - coverage run -m unittest discover
 deploy:
