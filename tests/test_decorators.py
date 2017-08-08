@@ -7,6 +7,7 @@ Created on Sat Jul 29 00:15:42 2017
 """
 
 import unittest
+
 from uniphy import decorators
 
 
@@ -125,6 +126,80 @@ class TestTypeChecked(unittest.TestCase):
             pass
 
         test_func(1, 2, 3, b=4)
+
+    def test_bound_method_correct_annotation(self):
+        """Test correct annotations for bound methods."""
+
+        class CorrectAnnotation():
+            @decorators.type_checked
+            def bar(self, a: int):
+                pass
+
+        foo = CorrectAnnotation()
+        # Call with correct argument.
+        foo.bar(2)
+        # Call with wrong argument.
+        with self.assertRaises(TypeError):
+            foo.bar("hello")
+
+    def test_bound_method_wrong_return_value(self):
+        """Test bound method with wrong return value."""
+
+        class WrongReturnValue():
+            @decorators.type_checked
+            def bar(self) -> int:
+                return "hello"
+
+        foo = WrongReturnValue()
+        with self.assertRaises(TypeError):
+            foo.bar()
+
+    def test_bound_method_wrong_default_values(self):
+        """Test bound methods with a wrong default value."""
+        with self.assertRaises(TypeError):
+            class WrongDefaultValue():
+                @decorators.type_checked
+                def bar(self, a: int = "hello"):
+                    pass
+
+    def test_class_method_correct_annotation(self):
+        """Test correct annotations for class methods."""
+
+        class CorrectAnnotation():
+            @decorators.type_checked
+            @classmethod
+            def bar(cls, a: int):
+                pass
+
+        # Call with correct argument.
+        CorrectAnnotation.bar(2)
+        # Call with wrong argument.
+        with self.assertRaises(TypeError):
+            CorrectAnnotation.bar("hello")
+
+    def test_class_method_wrong_return_value(self):
+        """Test clas method with wrong return value."""
+
+        class WrongReturnValue():
+            @classmethod
+            @decorators.type_checked
+            def bar(cls) -> int:
+                return "hello"
+
+        with self.assertRaises(TypeError):
+            WrongReturnValue.bar()
+
+    def test_class_method_wrong_default_values(self):
+        """Test class methods with a wrong default value."""
+        with self.assertRaises(TypeError):
+            class WrongDefaultValue():
+                @classmethod
+                @decorators.type_checked
+                def bar(cls, a: int = "hello"):
+                    pass
+
+    # def test_static_method(self):
+    #     # Not tested yet because in principle equivalent to normal function.
 
 
 if __name__ == '__main__':
