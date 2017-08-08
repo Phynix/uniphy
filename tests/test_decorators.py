@@ -166,8 +166,8 @@ class TestTypeChecked(unittest.TestCase):
         """Test correct annotations for class methods."""
 
         class CorrectAnnotation():
-            @decorators.type_checked
             @classmethod
+            @decorators.type_checked
             def bar(cls, a: int):
                 pass
 
