@@ -11,7 +11,6 @@ from functools import wraps
 from inspect import Parameter
 
 
-# TODO: Implement type_checked for bound methods.
 def type_checked(func):
     """Decorator for dynamic type checking with annotations.
 

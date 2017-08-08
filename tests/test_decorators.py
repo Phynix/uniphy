@@ -37,7 +37,6 @@ failures2 = [
 
 
 class TestTypeChecked(unittest.TestCase):
-    # TODO: Test type checked for bound methods.
 
     @staticmethod
     def test_return_correct():
