@@ -29,6 +29,19 @@ class type_checked():
         Parameter.POSITIONAL_OR_KEYWORD
     )
 
+    def __new__(cls, *args, **kwargs):
+        self = super().__new__(cls)
+
+        if not args or isinstance(args[0], bool):
+            # Called as @type_checked(...)
+            return self
+        elif callable(args[0]):
+            # Called as @type_checked
+            msg = "type_checked must be called with brackets like this type_checked() and can only accept booleans."
+            raise SyntaxError(msg)
+        else:
+            raise TypeError("Illegal decorator argument: {}".format(args[0]))
+
     def __init__(self, check_arguments=True, check_defaults=True, check_return=True):
         """
         Parameters
@@ -95,7 +108,6 @@ class type_checked():
             return result
 
         return wrapper
-
 
     @staticmethod
     def __is_suitable_annotation(annotation):
