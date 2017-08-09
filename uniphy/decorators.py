@@ -14,12 +14,28 @@ from inspect import Parameter
 class type_checked():
     """Decorator for dynamic type checking with annotations.
 
-    + Each Parameter and the return value can be annotated with one expression of <class 'type'>.
-    + Other expressions or missing annotations are ignored.
-    + Default values are type checked once the decorator is used for the first time.
-    + All other annotations are checked once per function call.
-    + Type checking of arguments, default values or the return value can be turned off separately.
-    + Annotations for *args and **kwargs are ignored.
+    - Decorates functions, static methods and bound methods.
+    - Each Parameter and the return value can be annotated with one expression of <class 'type'>.
+    - Other expressions or missing annotations are ignored.
+    - Default values are type checked once when the function is decorated.
+    - All other annotations are checked once per function call.
+    - Type checking of arguments, default values or the return value can be turned off separately.
+    - Annotations for *args and **kwargs are ignored.
+
+    Examples
+    --------
+    >>> @type_checked
+        def foo(a : int, b : int = 3) -> int
+            return a + b
+    >>> @type_checked(check_defaults=False)
+        def bar(a : int = 3.2):
+            pass
+    >>> @type_checked()
+        def knu(a : int = 3.2):
+            pass
+    Traceback (most recent call last):
+        ...
+    TypeError: default argument a = 3.2 is not instance of <class 'int'>
     """
 
     # *args, **kwargs are ignored.
@@ -30,6 +46,19 @@ class type_checked():
     )
 
     def __new__(cls, *args, **kwargs):
+        """Allows for usage of different syntax: @type_checked or @type_checked(...)
+
+        Returns
+        -------
+        callable or type_checked
+            Depending on how __new__ was called the wrapped function or an instance of type_checked is
+            returned.
+
+        Raises
+        ------
+        TypeError
+            If illegal decorator argument was used.
+        """
         self = super().__new__(cls)
 
         if (not args and not kwargs) \
@@ -45,12 +74,11 @@ class type_checked():
             raise TypeError("Illegal decorator arguments: args={}, kwargs={}".format(args, kwargs))
 
     def __init__(self, check_arguments=True, check_defaults=True, check_return=True):
-        """Initializes the decorator and sets the decorator arguments.
-
+        """Sets decorator arguments.
         Parameters
         ----------
         check_arguments : bool
-            Decided whether arguments should be checked at execution time.
+            Decides whether arguments should be checked at execution time.
         check_defaults : bool
             Decides whether default values should be checked at declaration.
         check_return : bool
@@ -72,6 +100,11 @@ class type_checked():
         -------
         decorated : callable
             Decorated function.
+
+        Raises
+        ------
+        TypeError
+            If default value does not match annotation.
         """
         signature = inspect.signature(func)
         parameters = signature.parameters
@@ -83,7 +116,7 @@ class type_checked():
                         and parameter.default is not None \
                         and self.__is_suitable_annotation(parameter.annotation) \
                         and not isinstance(parameter.default, parameter.annotation):
-                    msg = 'default argument {}={} is not instance of {}'
+                    msg = 'default argument {} = {} is not instance of {}'
                     raise TypeError(msg.format(parameter.name, parameter.default,
                                                parameter.annotation))
 
@@ -100,7 +133,7 @@ class type_checked():
                     if parameter.kind in self.ALLOWED_PARAMETER_KINDS \
                             and self.__is_suitable_annotation(annotation) \
                             and not isinstance(value, annotation):
-                        msg = 'argument {}={} is not instance of {}'
+                        msg = 'argument {} = {} is not instance of {}'
                         raise TypeError(msg.format(arg_name, value, annotation))
 
             # Check type of return value.
