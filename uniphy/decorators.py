@@ -75,6 +75,7 @@ class type_checked():
 
     def __init__(self, check_arguments=True, check_defaults=True, check_return=True):
         """Sets decorator arguments.
+
         Parameters
         ----------
         check_arguments : bool
