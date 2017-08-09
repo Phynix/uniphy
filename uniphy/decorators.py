@@ -12,7 +12,6 @@ from inspect import Parameter
 
 
 class type_checked():
-
     """Decorator for dynamic type checking with annotations.
 
     + Each Parameter and the return value can be annotated with one expression of <class 'type'>.
@@ -46,7 +45,7 @@ class type_checked():
             raise TypeError("Illegal decorator arguments: args={}, kwargs={}".format(args, kwargs))
 
     def __init__(self, check_arguments=True, check_defaults=True, check_return=True):
-        """
+        """Initializes the decorator and sets the decorator arguments.
 
         Parameters
         ----------
@@ -62,7 +61,7 @@ class type_checked():
         self.check_return = check_return
 
     def __call__(self, func):
-        """
+        """Decorates the function.
 
         Parameters
         ----------
@@ -71,7 +70,7 @@ class type_checked():
 
         Returns
         -------
-        wrapper : callable
+        decorated : callable
             Decorated function.
         """
         signature = inspect.signature(func)
@@ -89,7 +88,7 @@ class type_checked():
                                                parameter.annotation))
 
         @wraps(func)
-        def wrapper(*args, **kwargs):
+        def decorated(*args, **kwargs):
             bound_arguments = signature.bind(*args, **kwargs)
             all_args = bound_arguments.arguments
 
@@ -112,7 +111,7 @@ class type_checked():
                     raise TypeError('expected {}, returned {}'.format(annotation, type(result)))
             return result
 
-        return wrapper
+        return decorated
 
     @staticmethod
     def __is_suitable_annotation(annotation):
