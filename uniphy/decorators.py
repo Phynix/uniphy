@@ -12,6 +12,7 @@ from inspect import Parameter
 
 
 class type_checked():
+
     """Decorator for dynamic type checking with annotations.
 
     + Each Parameter and the return value can be annotated with one expression of <class 'type'>.
@@ -46,6 +47,7 @@ class type_checked():
 
     def __init__(self, check_arguments=True, check_defaults=True, check_return=True):
         """
+
         Parameters
         ----------
         check_arguments : bool
@@ -61,6 +63,7 @@ class type_checked():
 
     def __call__(self, func):
         """
+
         Parameters
         ----------
         func : callable
@@ -118,6 +121,6 @@ class type_checked():
         This is supposed to prevent other python expressions in annotations
         from crashing this decorator.
         """
-        # Used for testing Parameter and Signature annotations. Might fail in the future due to Parameter.empty !=
-        # Signature.empty.
+        # Used for testing Parameter and Signature annotations. Might fail in the future due to
+        # Parameter.empty != Signature.empty.
         return annotation is not Parameter.empty and isinstance(annotation, type)
