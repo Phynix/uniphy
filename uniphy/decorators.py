@@ -47,7 +47,7 @@ class type_checked():
         Parameters
         ----------
         check_arguments : bool
-            Decided wheter arguments should be checked at execution time.
+            Decided whether arguments should be checked at execution time.
         check_defaults : bool
             Decides whether default values should be checked at declaration.
         check_return : bool
@@ -79,6 +79,7 @@ class type_checked():
                     and parameter.default is not None
                     and self.__is_suitable_annotation(parameter.annotation)
                     and not isinstance(parameter.default, parameter.annotation)):
+
                     msg = 'default argument {}={} is not instance of {}'
                     raise TypeError(msg.format(parameter.name, parameter.default,
                                                parameter.annotation))
@@ -96,6 +97,7 @@ class type_checked():
                     if (parameter.kind in self.ALLOWED_PARAMETER_KINDS
                         and self.__is_suitable_annotation(annotation)
                         and not isinstance(value, annotation)):
+
                         msg = 'argument {}={} is not instance of {}'
                         raise TypeError(msg.format(arg_name, value, annotation))
 
