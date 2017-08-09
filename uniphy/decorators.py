@@ -107,7 +107,7 @@ class type_checked():
         TypeError
             If default value does not match annotation.
         """
-        # Turn off decorator when in run in optimized mode. python -O
+        # Turn off decorator when run in optimized mode. python -O
         if not __debug__:
             return func
 
