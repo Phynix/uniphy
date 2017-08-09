@@ -37,8 +37,8 @@ class type_checked():
             return self
         elif callable(args[0]):
             # Called as @type_checked
-            msg = "type_checked must be called with brackets like this type_checked() and can only accept booleans."
-            raise SyntaxError(msg)
+            self.__init__()
+            return self.__call__(args[0])
         else:
             raise TypeError("Illegal decorator argument: {}".format(args[0]))
 

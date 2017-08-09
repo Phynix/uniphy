@@ -11,12 +11,12 @@ import unittest
 from uniphy import decorators
 
 
-@decorators.type_checked()
+@decorators.type_checked
 def test_func1(a: int, b: "nonsene", c: 1*1 = "hello") -> (1, 'hala'):
     pass
 
 
-@decorators.type_checked()
+@decorators.type_checked
 def test_func2(a, b: str, c=None, d: list = None):
     pass
 
@@ -42,7 +42,7 @@ class TestTypeChecked(unittest.TestCase):
     def test_return_correct():
         """Raise no exception when return type is correct."""
 
-        @decorators.type_checked()
+        @decorators.type_checked
         def a() -> int:
             return 1
 
@@ -51,7 +51,7 @@ class TestTypeChecked(unittest.TestCase):
     def test_return_incorrect(self):
         """Raise Type when return type incorrect."""
 
-        @decorators.type_checked()
+        @decorators.type_checked
         def a() -> int:
             return "hello"
 
@@ -106,13 +106,13 @@ class TestTypeChecked(unittest.TestCase):
         def a(a: int = 2):
             pass
 
-        b = decorators.type_checked()(a)
+        b = decorators.type_checked(a)
         self.assertEqual(a.__annotations__, b.__annotations__)
 
     def test_wrong_default_arguments(self):
         """Test if wrong default arguments raise TypeError at function definition."""
         with self.assertRaises(TypeError):
-            @decorators.type_checked()
+            @decorators.type_checked
             def test_func(a: int = "hello"):
                 pass
 
@@ -120,7 +120,7 @@ class TestTypeChecked(unittest.TestCase):
     def test_works_with_args_kwargs():
         """Test that *args and **kwargs are ignored."""
 
-        @decorators.type_checked()
+        @decorators.type_checked
         def test_func(*args: int, **kwargs: int):
             pass
 
@@ -130,7 +130,7 @@ class TestTypeChecked(unittest.TestCase):
         """Test correct annotations for bound methods."""
 
         class CorrectAnnotation():
-            @decorators.type_checked()
+            @decorators.type_checked
             def bar(self, a: int):
                 pass
 
@@ -145,7 +145,7 @@ class TestTypeChecked(unittest.TestCase):
         """Test bound method with wrong return value."""
 
         class WrongReturnValue():
-            @decorators.type_checked()
+            @decorators.type_checked
             def bar(self) -> int:
                 return "hello"
 
@@ -157,7 +157,7 @@ class TestTypeChecked(unittest.TestCase):
         """Test bound methods with a wrong default value."""
         with self.assertRaises(TypeError):
             class WrongDefaultValue():
-                @decorators.type_checked()
+                @decorators.type_checked
                 def bar(self, a: int = "hello"):
                     pass
 
@@ -166,7 +166,7 @@ class TestTypeChecked(unittest.TestCase):
 
         class CorrectAnnotation():
             @classmethod
-            @decorators.type_checked()
+            @decorators.type_checked
             def bar(cls, a: int):
                 pass
 
@@ -181,7 +181,7 @@ class TestTypeChecked(unittest.TestCase):
 
         class WrongReturnValue():
             @classmethod
-            @decorators.type_checked()
+            @decorators.type_checked
             def bar(cls) -> int:
                 return "hello"
 
@@ -193,7 +193,7 @@ class TestTypeChecked(unittest.TestCase):
         with self.assertRaises(TypeError):
             class WrongDefaultValue():
                 @classmethod
-                @decorators.type_checked()
+                @decorators.type_checked
                 def bar(cls, a: int = "hello"):
                     pass
 
