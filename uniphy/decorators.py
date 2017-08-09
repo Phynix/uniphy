@@ -25,14 +25,14 @@ class type_checked():
     Examples
     --------
     >>> @type_checked
-        def foo(a : int, b : int = 3) -> int
-            return a + b
+    ... def foo(a : int, b : int = 3) -> int:
+    ...     return a + b
     >>> @type_checked(check_defaults=False)
-        def bar(a : int = 3.2):
-            pass
+    ... def bar(a : int = 3.2):
+    ...     pass
     >>> @type_checked()
-        def knu(a : int = 3.2):
-            pass
+    ... def knu(a : int = 3.2):
+    ...     pass
     Traceback (most recent call last):
         ...
     TypeError: default argument a = 3.2 is not instance of <class 'int'>
@@ -107,6 +107,10 @@ class type_checked():
         TypeError
             If default value does not match annotation.
         """
+        # Turn off decorator when in run in optimized mode. python -O
+        if not __debug__:
+            return func
+
         signature = inspect.signature(func)
         parameters = signature.parameters
 
