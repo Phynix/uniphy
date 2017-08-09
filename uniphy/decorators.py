@@ -95,7 +95,7 @@ class type_checked():
                     parameter = parameters[arg_name]
                     annotation = parameter.annotation
                     if (parameter.kind in self.ALLOWED_PARAMETER_KINDS
-                        and self.__is_suitable_annotation(annotation)
+                        and self.__is_suitable_annotation(annotation)  # If failes might be due to Parameter.empty != Signature.empty
                         and not isinstance(value, annotation)):
 
                         msg = 'argument {}={} is not instance of {}'
@@ -118,4 +118,6 @@ class type_checked():
         This is supposed to prevent other python expressions in annotations
         from crashing this decorator.
         """
+        # Used for testing Parameter and Signature annotations. Might fail in the future due to Parameter.empty !=
+        # Signature.empty.
         return annotation is not Parameter.empty and isinstance(annotation, type)
