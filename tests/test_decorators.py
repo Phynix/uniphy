@@ -37,7 +37,6 @@ failures2 = [
 
 
 class TestTypeChecked(unittest.TestCase):
-
     @staticmethod
     def test_return_correct():
         """Raise no exception when return type is correct."""
@@ -199,6 +198,86 @@ class TestTypeChecked(unittest.TestCase):
 
     # def test_static_method(self):
     #     # Not tested yet because in principle equivalent to normal function.
+
+    def test_decorator_arguments_no_arguments(self):
+        """Test whether @type_checked is the same as @type_checked()"""
+
+        def foo():
+            pass
+
+        # @type_checked
+        decorated_without_brackets = decorators.type_checked(foo)
+        # @type_checked()
+        decorated_with_brackets = decorators.type_checked()(foo)
+        # Test that same
+        self.assertEqual(decorated_without_brackets.__wrapped__, decorated_with_brackets.__wrapped__)
+
+    def test_decorator_arguments_positional_only(self):
+        """"Test whether positional arguments work for decorator"""
+
+        @decorators.type_checked(False, False, False)
+        def foo(a: int, b: int = 2.3) -> int:
+            return "hello"
+
+        # Check all functionality turned off.
+        foo(2.3)
+
+        # Check only some functionality turned off.
+        with self.assertRaises(TypeError):
+            decorators.type_checked(False, True, False)(foo)
+
+    def test_decorator_arguments_keyword_only(self):
+        """"Test whether keyword arguments work for decorator"""
+
+        @decorators.type_checked(check_arguments=False, check_defaults=False, check_return=False)
+        def foo(a: int, b: int = 2.3) -> int:
+            return "hello"
+
+        # Check all functionality turned off.
+        foo(2.3)
+
+        # Check only some functionality turned off.
+        with self.assertRaises(TypeError):
+            decorators.type_checked(check_arguments=False, check_defaults=True, check_return=False)(foo)
+
+    def test_decorator_arguements_positional_and_keyword(self):
+        """"Test whether positional and keyword arguments mixed work for decorator"""
+
+        @decorators.type_checked(False, check_defaults=False, check_return=False)
+        def foo(a: int, b: int = 2.3) -> int:
+            return "hello"
+
+        # Check all functionality turned off.
+        foo(2.3)
+
+        # Check only some functionality turned off.
+        with self.assertRaises(TypeError):
+            decorators.type_checked(False, check_defaults=True, check_return=False)(foo)
+
+    def test_decorator_arguments_wrong_arguments(self):
+        def foo():
+            pass
+
+        with self.assertRaises(TypeError):
+            decorators.type_checked(2)(foo)
+        with self.assertRaises(TypeError):
+            decorators.type_checked(check_arguments=2)
+
+    def test_decorating_class_method_raises_type_error(self):
+        @classmethod
+        def foo():
+            pass
+
+        with self.assertRaises(TypeError):
+            decorators.type_checked(foo)
+
+    def test_decorating_static_method_raises_type_error(self):
+        @staticmethod
+        def foo():
+            pass
+
+        with self.assertRaises(TypeError):
+            decorators.type_checked(foo)
 
 
 if __name__ == '__main__':

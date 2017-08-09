@@ -32,15 +32,17 @@ class type_checked():
     def __new__(cls, *args, **kwargs):
         self = super().__new__(cls)
 
-        if not args or isinstance(args[0], bool):
+        if (not args and not kwargs) \
+                or (args and all(isinstance(value, bool) for value in args)) \
+                or (kwargs and all(isinstance(value, bool) for value in kwargs.values())):
             # Called as @type_checked(...)
             return self
-        elif callable(args[0]):
+        elif args and callable(args[0]):
             # Called as @type_checked
             self.__init__()
             return self.__call__(args[0])
         else:
-            raise TypeError("Illegal decorator argument: {}".format(args[0]))
+            raise TypeError("Illegal decorator arguments: args={}, kwargs={}".format(args, kwargs))
 
     def __init__(self, check_arguments=True, check_defaults=True, check_return=True):
         """
@@ -75,11 +77,10 @@ class type_checked():
         # Check type of default values.
         if self.check_defaults:
             for parameter in parameters.values():
-                if (parameter.default is not Parameter.empty
-                    and parameter.default is not None
-                    and self.__is_suitable_annotation(parameter.annotation)
-                    and not isinstance(parameter.default, parameter.annotation)):
-
+                if parameter.default is not Parameter.empty \
+                        and parameter.default is not None \
+                        and self.__is_suitable_annotation(parameter.annotation) \
+                        and not isinstance(parameter.default, parameter.annotation):
                     msg = 'default argument {}={} is not instance of {}'
                     raise TypeError(msg.format(parameter.name, parameter.default,
                                                parameter.annotation))
@@ -94,10 +95,9 @@ class type_checked():
                 for arg_name, value in all_args.items():
                     parameter = parameters[arg_name]
                     annotation = parameter.annotation
-                    if (parameter.kind in self.ALLOWED_PARAMETER_KINDS
-                        and self.__is_suitable_annotation(annotation)  # If failes might be due to Parameter.empty != Signature.empty
-                        and not isinstance(value, annotation)):
-
+                    if parameter.kind in self.ALLOWED_PARAMETER_KINDS \
+                            and self.__is_suitable_annotation(annotation) \
+                            and not isinstance(value, annotation):
                         msg = 'argument {}={} is not instance of {}'
                         raise TypeError(msg.format(arg_name, value, annotation))
 
