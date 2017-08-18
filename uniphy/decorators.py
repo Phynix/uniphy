@@ -21,6 +21,8 @@ class type_checked():
     - All other annotations are checked once per function call.
     - Type checking of arguments, default values or the return value can be turned off separately.
     - Annotations for *args and **kwargs are ignored.
+    - The effect of this decorator is turned of if __debug__ == False i.e. if python is run with the
+    option -O.
 
     Examples
     --------
@@ -155,8 +157,7 @@ class type_checked():
     def __is_suitable_annotation(annotation):
         """Checks wether annotation is specified and is a type.
 
-        This is supposed to prevent other python expressions in annotations
-        from crashing this decorator.
+        This checks if annotations is relevant for this decorator.
         """
         # Used for testing Parameter and Signature annotations. Might fail in the future due to
         # Parameter.empty != Signature.empty.
