@@ -11,6 +11,7 @@ from functools import wraps
 from inspect import Parameter
 
 
+# noinspection PyPep8Naming,PyRedundantParentheses
 class type_checked():
     """Decorator for dynamic type checking with annotations.
 
@@ -71,12 +72,12 @@ class type_checked():
         elif args and callable(args[0]):
             # Called as @type_checked
             self.__init__()
-            return self.__call__(args[0])
+            return self(args[0])
         else:
             raise TypeError("Illegal decorator arguments: args={}, kwargs={}".format(args, kwargs))
 
     def __init__(self, check_arguments=True, check_defaults=True, check_return=True):
-        """Sets decorator arguments.
+        """Set decorator arguments.
 
         Parameters
         ----------
@@ -155,7 +156,7 @@ class type_checked():
 
     @staticmethod
     def __is_suitable_annotation(annotation):
-        """Checks wether annotation is specified and is a type.
+        """Checks whether annotation is specified and is a type.
 
         This checks if annotations is relevant for this decorator.
         """

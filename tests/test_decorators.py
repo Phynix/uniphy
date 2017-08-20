@@ -7,15 +7,18 @@ Created on Sat Jul 29 00:15:42 2017
 """
 
 import unittest
+from collections import OrderedDict
 
 from uniphy import decorators
 
 
+# noinspection PyMissingOrEmptyDocstring
 @decorators.type_checked
 def test_func1(a: int, b: "nonsene", c: 1*1 = "hello") -> (1, 'hala'):
     pass
 
 
+# noinspection PyMissingOrEmptyDocstring
 @decorators.type_checked
 def test_func2(a, b: str, c=None, d: list = None):
     pass
@@ -25,14 +28,14 @@ correct1 = (1, "hello", [], [])
 failures1 = [
     (1, 1, [], []),  # first annotation wrong
     (1, "hello", [], 1),  # second annotation wrong
-    (1, 1, 1, 1)  # both annoations wrong
+    (1, 1, 1, 1)  # both annotations wrong
 ]
 
-correct2 = {'a': 1, 'b': "hello", 'c': [], 'd': []}
+correct2 = OrderedDict(a=1, b="hello", c=[], d=[])
 failures2 = [
-    {'a': 1, 'b': 1, 'c': [], 'd': []},  # first annotation wrong
-    {'a': 1, 'b': 'hello', 'c': [], 'd': 1},  # second annotation wrong
-    {'a': 1, 'b': 1, 'c': 1, 'd': 1},  # both annotations wrong
+    OrderedDict(a=1, b=1, c=[], d=[]),  # first annotation wrong
+    OrderedDict(a=1, b='hello', c=[], d=1),  # second annotation wrong
+    OrderedDict(a=1, b=1, c=1, d=1),  # both annotations wrong
 ]
 
 
@@ -41,6 +44,7 @@ class TestTypeChecked(unittest.TestCase):
     def test_return_correct():
         """Raise no exception when return type is correct."""
 
+        # noinspection PyMissingOrEmptyDocstring
         @decorators.type_checked
         def a() -> int:
             return 1
@@ -50,6 +54,7 @@ class TestTypeChecked(unittest.TestCase):
     def test_return_incorrect(self):
         """Raise Type when return type incorrect."""
 
+        # noinspection PyMissingOrEmptyDocstring
         @decorators.type_checked
         def a() -> int:
             return "hello"
@@ -59,7 +64,7 @@ class TestTypeChecked(unittest.TestCase):
 
     @staticmethod
     def test_not_type_annotation():
-        """Test that annotations that are not a type are beeing ignored."""
+        """Test that annotations that are not a type are being ignored."""
         test_func1(1, b=1)
 
     @staticmethod
@@ -102,6 +107,7 @@ class TestTypeChecked(unittest.TestCase):
     def test_keep_annotation_metadata(self):
         """Test that annotation metadata is not influenced."""
 
+        # noinspection PyMissingOrEmptyDocstring
         def a(a: int = 2):
             pass
 
@@ -111,6 +117,7 @@ class TestTypeChecked(unittest.TestCase):
     def test_wrong_default_arguments(self):
         """Test if wrong default arguments raise TypeError at function definition."""
         with self.assertRaises(TypeError):
+            # noinspection PyMissingOrEmptyDocstring
             @decorators.type_checked
             def test_func(a: int = "hello"):
                 pass
@@ -119,16 +126,20 @@ class TestTypeChecked(unittest.TestCase):
     def test_works_with_args_kwargs():
         """Test that *args and **kwargs are ignored."""
 
+        # noinspection PyMissingOrEmptyDocstring
         @decorators.type_checked
         def test_func(*args: int, **kwargs: int):
             pass
 
         test_func(1, 2, 3, b=4)
 
+    # noinspection PyMissingOrEmptyDocstring
     def test_bound_method_correct_annotation(self):
         """Test correct annotations for bound methods."""
 
+        # noinspection PyRedundantParentheses
         class CorrectAnnotation():
+            # noinspection PyMissingOrEmptyDocstring
             @decorators.type_checked
             def bar(self, a: int):
                 pass
@@ -140,10 +151,13 @@ class TestTypeChecked(unittest.TestCase):
         with self.assertRaises(TypeError):
             foo.bar("hello")
 
+    # noinspection PyMissingOrEmptyDocstring
     def test_bound_method_wrong_return_value(self):
         """Test bound method with wrong return value."""
 
+        # noinspection PyRedundantParentheses
         class WrongReturnValue():
+            # noinspection PyMissingOrEmptyDocstring
             @decorators.type_checked
             def bar(self) -> int:
                 return "hello"
@@ -152,18 +166,24 @@ class TestTypeChecked(unittest.TestCase):
         with self.assertRaises(TypeError):
             foo.bar()
 
+    # noinspection PyMissingOrEmptyDocstring
     def test_bound_method_wrong_default_values(self):
         """Test bound methods with a wrong default value."""
         with self.assertRaises(TypeError):
+            # noinspection PyRedundantParentheses
             class WrongDefaultValue():
+                # noinspection PyMissingOrEmptyDocstring
                 @decorators.type_checked
                 def bar(self, a: int = "hello"):
                     pass
 
+    # noinspection PyMissingOrEmptyDocstring
     def test_class_method_correct_annotation(self):
         """Test correct annotations for class methods."""
 
+        # noinspection PyRedundantParentheses
         class CorrectAnnotation():
+            # noinspection PyMissingOrEmptyDocstring
             @classmethod
             @decorators.type_checked
             def bar(cls, a: int):
@@ -175,10 +195,13 @@ class TestTypeChecked(unittest.TestCase):
         with self.assertRaises(TypeError):
             CorrectAnnotation.bar("hello")
 
+    # noinspection PyMissingOrEmptyDocstring
     def test_class_method_wrong_return_value(self):
-        """Test clas method with wrong return value."""
+        """Test class method with wrong return value."""
 
+        # noinspection PyRedundantParentheses
         class WrongReturnValue():
+            # noinspection PyMissingOrEmptyDocstring
             @classmethod
             @decorators.type_checked
             def bar(cls) -> int:
@@ -187,10 +210,13 @@ class TestTypeChecked(unittest.TestCase):
         with self.assertRaises(TypeError):
             WrongReturnValue.bar()
 
+    # noinspection PyMissingOrEmptyDocstring
     def test_class_method_wrong_default_values(self):
         """Test class methods with a wrong default value."""
         with self.assertRaises(TypeError):
+            # noinspection PyRedundantParentheses
             class WrongDefaultValue():
+                # noinspection PyMissingOrEmptyDocstring
                 @classmethod
                 @decorators.type_checked
                 def bar(cls, a: int = "hello"):
@@ -202,6 +228,7 @@ class TestTypeChecked(unittest.TestCase):
     def test_decorator_arguments_no_arguments(self):
         """Test whether @type_checked is the same as @type_checked()"""
 
+        # noinspection PyMissingOrEmptyDocstring
         def foo():
             pass
 
@@ -215,6 +242,7 @@ class TestTypeChecked(unittest.TestCase):
     def test_decorator_arguments_positional_only(self):
         """"Test whether positional arguments work for decorator"""
 
+        # noinspection PyMissingOrEmptyDocstring
         @decorators.type_checked(False, False, False)
         def foo(a: int, b: int = 2.3) -> int:
             return "hello"
@@ -229,6 +257,7 @@ class TestTypeChecked(unittest.TestCase):
     def test_decorator_arguments_keyword_only(self):
         """"Test whether keyword arguments work for decorator"""
 
+        # noinspection PyMissingOrEmptyDocstring
         @decorators.type_checked(check_arguments=False, check_defaults=False, check_return=False)
         def foo(a: int, b: int = 2.3) -> int:
             return "hello"
@@ -240,9 +269,10 @@ class TestTypeChecked(unittest.TestCase):
         with self.assertRaises(TypeError):
             decorators.type_checked(check_arguments=False, check_defaults=True, check_return=False)(foo)
 
-    def test_decorator_arguements_positional_and_keyword(self):
+    def test_decorator_arguments_positional_and_keyword(self):
         """"Test whether positional and keyword arguments mixed work for decorator"""
 
+        # noinspection PyMissingOrEmptyDocstring
         @decorators.type_checked(False, check_defaults=False, check_return=False)
         def foo(a: int, b: int = 2.3) -> int:
             return "hello"
@@ -255,6 +285,7 @@ class TestTypeChecked(unittest.TestCase):
             decorators.type_checked(False, check_defaults=True, check_return=False)(foo)
 
     def test_decorator_arguments_wrong_arguments(self):
+        # noinspection PyMissingOrEmptyDocstring
         def foo():
             pass
 
@@ -264,6 +295,7 @@ class TestTypeChecked(unittest.TestCase):
             decorators.type_checked(check_arguments=2)
 
     def test_decorating_class_method_raises_type_error(self):
+        # noinspection PyMissingOrEmptyDocstring
         @classmethod
         def foo():
             pass
@@ -272,6 +304,7 @@ class TestTypeChecked(unittest.TestCase):
             decorators.type_checked(foo)
 
     def test_decorating_static_method_raises_type_error(self):
+        # noinspection PyMissingOrEmptyDocstring
         @staticmethod
         def foo():
             pass

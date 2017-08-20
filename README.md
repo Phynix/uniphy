@@ -9,7 +9,7 @@ Uniphy stands for "**Uni**versity **Phy**sics". The package focuses on specialis
 
 ## Current projects
 
-The package is still in its early stage of planning and first implemenations. It is currently not usable for any production-like application.
+The package is still in its early stage of planning and first implementations. It is currently not usable for any production-like application.
 
 
 ### Output
@@ -26,7 +26,7 @@ Minimal example:
 import uniphy as up
 
 out = up.output()
-out.print("Same as print", "\nBut I can be saved as well.)
+out.print("Same as print", "\nBut I can be saved as well.")
 
 OR
 

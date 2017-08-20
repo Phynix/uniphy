@@ -15,8 +15,9 @@ with io.open(os.path.join(current_dir, 'requirements.txt')) as f:
 
 
 def readme():
-    with open('README.md') as f:
-        return f.read()
+    """Open README.md, read the file and return it as a string"""
+    with open('README.md') as readme:
+        return readme.read()
 
 
 setup(name='uniphy',
