@@ -73,7 +73,7 @@ class TestTypeChecked(unittest.TestCase):
 
     def test_only_positional_no_defaults_wrong_arguments(self):
         for failure in failures1:
-            with self.assertRaises(TypeError):
+            with self.subTest(failure=failure), self.assertRaises(TypeError):
                 test_func2(*failure)
 
     @staticmethod
@@ -90,7 +90,7 @@ class TestTypeChecked(unittest.TestCase):
 
     def test_only_kwarg_no_defaults_wrong_arguments(self):
         for failure in failures2:
-            with self.assertRaises(TypeError):
+            with self.subTest(failure=failure), self.assertRaises(TypeError):
                 test_func2(**failure)
 
     @staticmethod
