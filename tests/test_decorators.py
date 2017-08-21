@@ -40,6 +40,13 @@ failures2 = [
 
 
 class TestTypeChecked(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.decorator_args_type_err_regex = r'^Illegal decorator arguments: args=\(.{0,}?\), kwargs={.{0,}?}$'
+        cls.default_type_error_regex = r'^default argument .{1,}? is not instance of .{2,}?$'
+        cls.argument_type_error_regex = r'^argument .{1,}? is not instance of .{2,}?$'
+        cls.return_type_error_regex = r'^expected .{2,}?, returned .{2,}?$'
+
     @staticmethod
     def test_return_correct():
         """Raise no exception when return type is correct."""
@@ -59,7 +66,7 @@ class TestTypeChecked(unittest.TestCase):
         def a() -> int:
             return "hello"
 
-        with self.assertRaisesRegex(TypeError, r'^expected .{2,}?, returned .{2,}?$'):
+        with self.assertRaisesRegex(TypeError, self.return_type_error_regex):
             a()
 
     @staticmethod
@@ -74,7 +81,7 @@ class TestTypeChecked(unittest.TestCase):
     def test_only_positional_no_defaults_wrong_arguments(self):
         for failure in failures1:
             with self.subTest(failure=failure), \
-                 self.assertRaisesRegex(TypeError, r'^argument .{1,}? is not instance of .{2,}?$'):
+                 self.assertRaisesRegex(TypeError, self.argument_type_error_regex):
                 test_func2(*failure)
 
     @staticmethod
@@ -82,7 +89,7 @@ class TestTypeChecked(unittest.TestCase):
         test_func2(*correct1[:2])
 
     def test_only_positional_with_defaults_wrong_arguments(self):
-        with self.assertRaisesRegex(TypeError, r'^argument .{1,}? is not instance of .{2,}?$'):
+        with self.assertRaisesRegex(TypeError, self.argument_type_error_regex):
             test_func2(1, 1)
 
     @staticmethod
@@ -92,7 +99,7 @@ class TestTypeChecked(unittest.TestCase):
     def test_only_kwarg_no_defaults_wrong_arguments(self):
         for failure in failures2:
             with self.subTest(failure=failure), \
-                 self.assertRaisesRegex(TypeError, r'^argument .{1,}? is not instance of .{2,}?$'):
+                 self.assertRaisesRegex(TypeError, self.argument_type_error_regex):
                 test_func2(**failure)
 
     @staticmethod
@@ -103,7 +110,7 @@ class TestTypeChecked(unittest.TestCase):
         test_func2(**correct2)
 
     def test_only_kwarg_with_defaults_wrong_arguments(self):
-        with self.assertRaisesRegex(TypeError, r'^argument .{1,}? is not instance of .{2,}?$'):
+        with self.assertRaisesRegex(TypeError, self.argument_type_error_regex):
             test_func2(a=1, b=1)
 
     def test_keep_annotation_metadata(self):
@@ -118,7 +125,7 @@ class TestTypeChecked(unittest.TestCase):
 
     def test_wrong_default_arguments(self):
         """Test if wrong default arguments raise TypeError at function definition."""
-        with self.assertRaisesRegex(TypeError, r'^default argument .{1,}? is not instance of .{2,}?$'):
+        with self.assertRaisesRegex(TypeError, self.default_type_error_regex):
             # noinspection PyMissingOrEmptyDocstring
             @decorators.type_checked
             def test_func(a: int = "hello"):
@@ -150,7 +157,7 @@ class TestTypeChecked(unittest.TestCase):
         # Call with correct argument.
         foo.bar(2)
         # Call with wrong argument.
-        with self.assertRaisesRegex(TypeError, r'^argument .{1,}? is not instance of .{2,}?$'):
+        with self.assertRaisesRegex(TypeError, self.argument_type_error_regex):
             foo.bar("hello")
 
     # noinspection PyMissingOrEmptyDocstring
@@ -165,13 +172,13 @@ class TestTypeChecked(unittest.TestCase):
                 return "hello"
 
         foo = WrongReturnValue()
-        with self.assertRaisesRegex(TypeError, r'^expected .{2,}?, returned .{2,}?$'):
+        with self.assertRaisesRegex(TypeError, self.return_type_error_regex):
             foo.bar()
 
     # noinspection PyMissingOrEmptyDocstring
     def test_bound_method_wrong_default_values(self):
         """Test bound methods with a wrong default value."""
-        with self.assertRaisesRegex(TypeError, r'^default argument .{1,}? is not instance of .{2,}?$'):
+        with self.assertRaisesRegex(TypeError, self.default_type_error_regex):
             # noinspection PyRedundantParentheses
             class WrongDefaultValue():
                 # noinspection PyMissingOrEmptyDocstring
@@ -194,7 +201,7 @@ class TestTypeChecked(unittest.TestCase):
         # Call with correct argument.
         CorrectAnnotation.bar(2)
         # Call with wrong argument.
-        with self.assertRaisesRegex(TypeError, r'^argument .{1,}? is not instance of .{2,}?$'):
+        with self.assertRaisesRegex(TypeError, self.argument_type_error_regex):
             CorrectAnnotation.bar("hello")
 
     # noinspection PyMissingOrEmptyDocstring
@@ -209,13 +216,13 @@ class TestTypeChecked(unittest.TestCase):
             def bar(cls) -> int:
                 return "hello"
 
-        with self.assertRaisesRegex(TypeError, r'^expected .{2,}?, returned .{2,}?$'):
+        with self.assertRaisesRegex(TypeError, self.return_type_error_regex):
             WrongReturnValue.bar()
 
     # noinspection PyMissingOrEmptyDocstring
     def test_class_method_wrong_default_values(self):
         """Test class methods with a wrong default value."""
-        with self.assertRaisesRegex(TypeError, r'^default argument .{1,}? is not instance of .{2,}?$'):
+        with self.assertRaisesRegex(TypeError, self.default_type_error_regex):
             # noinspection PyRedundantParentheses
             class WrongDefaultValue():
                 # noinspection PyMissingOrEmptyDocstring
@@ -291,7 +298,7 @@ class TestTypeChecked(unittest.TestCase):
         def foo():
             pass
 
-        with self.assertRaisesRegex(TypeError, r'^Illegal decorator arguments: args=\(.{0,}?\), kwargs={.{0,}?}$'):
+        with self.assertRaisesRegex(TypeError, self.decorator_args_type_err_regex):
             decorators.type_checked(2)(foo)
         with self.assertRaises(TypeError):
             decorators.type_checked(check_arguments=2)
@@ -302,7 +309,7 @@ class TestTypeChecked(unittest.TestCase):
         def foo():
             pass
 
-        with self.assertRaisesRegex(TypeError, r'^Illegal decorator arguments: args=\(.{0,}?\), kwargs={.{0,}?}$'):
+        with self.assertRaisesRegex(TypeError, self.decorator_args_type_err_regex):
             decorators.type_checked(foo)
 
     def test_decorating_static_method_raises_type_error(self):
@@ -312,7 +319,7 @@ class TestTypeChecked(unittest.TestCase):
             pass
 
         with self.assertRaisesRegex(TypeError,
-                                    r'^Illegal decorator arguments: args=\(.{0,}?\), kwargs={.{0,}?}$'):
+                                    self.decorator_args_type_err_regex):
             decorators.type_checked(foo)
 
 
