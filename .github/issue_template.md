@@ -6,7 +6,7 @@
 <!-- Provide User story in the title as well! -->
 
 ### User Story
-<!-- As a <type of user>, I want <some goal> so that <some reason>. -->
+<!-- As a <type of user>, I want <some goal> so that <some reason why you wnat goal>. -->
 ### Acceptance Criteria
  -
  -
