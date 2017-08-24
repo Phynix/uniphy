@@ -9,9 +9,9 @@ engines:
     enabled: true
   radon:
     enabled: true
-    checks:
-      Complexity:
-        enabled: false
+#    checks:
+#      Complexity:
+#        enabled: false
     config: 
       python_version: 3
 ratings:
