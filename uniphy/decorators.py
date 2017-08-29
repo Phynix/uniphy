@@ -145,6 +145,8 @@ class type_checked():
     def decorate_function(self, func):
         """Decorates a function or method.
 
+        This is the core function of this class. All decorations are done with this class one way or another.
+
         Parameters
         ----------
         func : callable
