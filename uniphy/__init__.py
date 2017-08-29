@@ -1,4 +1,5 @@
-
-
-__author__ = "Jonas Eschle 'Mayou36', Johannes Lade, Jim Buffat"
-__version__ = '0.0.1'
+"""
+Init file of uniphy, empty
+"""
+__author__ = "Jonas Eschle 'Mayou36', Johannes Lade 'SebastianJL', Jim Buffat"
+__version__ = '0.0.2'
