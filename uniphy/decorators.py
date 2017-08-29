@@ -7,7 +7,7 @@ Created on Tue Jul 25 23:05:04 2017
 """
 
 import inspect
-from functools import wraps, lru_cache
+from functools import wraps, lru_cache, update_wrapper
 from inspect import Parameter
 
 
@@ -107,12 +107,12 @@ class type_checked():
         """
         if inspect.isclass(arg):
             # Called to decorate a class.
-            return self.decorate_class(arg)
+            return self.__decorate_class(arg)
         else:
             # Called to decorate a function.
-            return self.decorate_function(arg)
+            return self.__decorate_function(arg)
 
-    def decorate_class(self, Cls):
+    def __decorate_class(self, Cls):
         """Decorates a class.
 
         Parameters
@@ -141,8 +141,13 @@ class type_checked():
                 else:
                     return item
         return Decorated
+        # print(inspect.getmembers(Cls, inspect.ismethod))
+        # for name, func in inspect.getmembers(Cls, inspect.ismethod):
+        #     print(name, func)
+        #     setattr(Cls, name, type_checked(func))
+        # return Cls
 
-    def decorate_function(self, func):
+    def __decorate_function(self, func):
         """Decorates a function or method.
 
         This is the core function of this class. All decorations are done with this class one way or another.

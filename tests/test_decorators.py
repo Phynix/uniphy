@@ -296,49 +296,69 @@ class TestTypeChecked(unittest.TestCase):
 
     def test_decorating_class_method_raises_type_error(self):
         # noinspection PyMissingOrEmptyDocstring
-        @classmethod
-        def foo():
-            pass
-
         with self.assertRaisesRegex(TypeError, self.decorator_arg_type_err_regex):
-            decorators.type_checked(foo)
+            class Foo:
+                @decorators.type_checked
+                @classmethod
+                def foo(cls):
+                    pass
 
     def test_decorating_static_method_raises_type_error(self):
         # noinspection PyMissingOrEmptyDocstring
-        @staticmethod
-        def foo():
-            pass
+        with self.assertRaisesRegex(TypeError, self.decorator_arg_type_err_regex):
+            class Foo:
+                @decorators.type_checked
+                @staticmethod
+                def foo():
+                    pass
 
-        with self.assertRaisesRegex(TypeError,
-                                    self.decorator_arg_type_err_regex):
-            decorators.type_checked(foo)
-
-    def test_decorating_class(self):
+    def test_decorating_class_with_method(self):
+        """Test that class methods of decorated classes are decorated correctly."""
         @decorators.type_checked
-        class foo:
-            def __init__(self, a : int):
-                pass
-
+        class Goo:
             def bla(self, a : int):
                 pass
 
         correct = 3
         incorrect = 3.5
+        goo = Goo()
         with self.subTest(a=correct):
-            t1 = foo(a=correct)
-        with self.subTest(a=correct):
-            t1.bla(a=correct)
+            goo.bla(a=correct)
         with self.subTest(a=incorrect), self.assertRaisesRegex(TypeError, self.argument_type_error_regex):
-            t2 = foo(a=incorrect)
-        with self.subTest(a=incorrect), self.assertRaisesRegex(TypeError, self.argument_type_error_regex):
-            t2.bla(a=incorrect)
+            goo.bla(a=incorrect)
+
+    def test_decorating_class_with_init(self):
+        """Test that the __init__ method is not decorated."""
+        @decorators.type_checked
+        class Foo:
+            def __init__(self, a : int):
+                pass
+
+        correct = 3
+        incorrect = 3.5
+        with self.subTest(arg=correct):
+            Foo(a=correct)
+        with self.subTest(arg=incorrect):
+            Foo(a=incorrect)
 
     def test_decorated_class_stays_class(self):
         """Test that decorated class actually stays a class."""
         @decorators.type_checked
-        class foo:
+        class Foo:
+            """Some docstring."""
             pass
-        self.assertIsInstance(foo, type)
+
+        self.assertIsInstance(Foo, type)
+
+    def test_decorated_class_keeps_docstring(self):
+        """Test that decorated class actually stays a class."""
+        @decorators.type_checked
+        class Foo:
+            """Some docstring."""
+            pass
+
+        self.assertIsInstance(Foo, type)
+        self.assertEqual("Some docstring.", Foo.__doc__)
 
 if __name__ == '__main__':
     unittest.main()
