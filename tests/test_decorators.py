@@ -313,6 +313,32 @@ class TestTypeChecked(unittest.TestCase):
                                     self.decorator_arg_type_err_regex):
             decorators.type_checked(foo)
 
+    def test_decorating_class(self):
+        @decorators.type_checked
+        class foo:
+            def __init__(self, a : int):
+                pass
+
+            def bla(self, a : int):
+                pass
+
+        correct = 3
+        incorrect = 3.5
+        with self.subTest(a=correct):
+            t1 = foo(a=correct)
+        with self.subTest(a=correct):
+            t1.bla(a=correct)
+        with self.subTest(a=incorrect), self.assertRaisesRegex(TypeError, self.argument_type_error_regex):
+            t2 = foo(a=incorrect)
+        with self.subTest(a=incorrect), self.assertRaisesRegex(TypeError, self.argument_type_error_regex):
+            t2.bla(a=incorrect)
+
+    def test_decorated_class_stays_class(self):
+        """Test that decorated class actually stays a class."""
+        @decorators.type_checked
+        class foo:
+            pass
+        self.assertIsInstance(foo, type)
 
 if __name__ == '__main__':
     unittest.main()

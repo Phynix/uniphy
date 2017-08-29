@@ -7,7 +7,7 @@ Created on Tue Jul 25 23:05:04 2017
 """
 
 import inspect
-from functools import wraps
+from functools import wraps, lru_cache
 from inspect import Parameter
 
 
@@ -24,6 +24,7 @@ class type_checked():
     - Annotations for *args and **kwargs are ignored.
     - The effect of this decorator is turned of if __debug__ == False i.e. if python is run with the
     option -O.
+    - Can be used as class Decorator to decorate each method of the class.
 
     Examples
     --------
@@ -92,8 +93,57 @@ class type_checked():
         self.check_defaults = check_defaults
         self.check_return = check_return
 
-    def __call__(self, func):
-        """Decorates the function.
+    def __call__(self, arg):
+        """Decorates class or function.
+        Parameters
+        ----------
+        arg : type or callable
+            Class or function to decorate.
+
+        Returns
+        -------
+        type or callable
+            Decorated class or function.
+        """
+        if inspect.isclass(arg):
+            # Called to decorate a class.
+            return self.decorate_class(arg)
+        else:
+            # Called to decorate a function.
+            return self.decorate_function(arg)
+
+    def decorate_class(self, Cls):
+        """Decorates a class.
+
+        Parameters
+        ----------
+        Cls : type
+            A class to be decorated
+
+        Returns
+        -------
+        Decorated : type
+            Decorated class.
+        """
+        class Decorated(Cls):
+            @type_checked
+            def __init__(self, *args, **kwargs):
+                super().__init__(*args, **kwargs)
+
+            @lru_cache(maxsize=None)
+            def __getattribute__(self, item):
+                """Checks if something is a method in an attribute lookup and decorates it with type_checked
+                if this is the case.
+                """
+                item = super().__getattribute__(item)
+                if inspect.ismethod(item):
+                    return type_checked(item)
+                else:
+                    return item
+        return Decorated
+
+    def decorate_function(self, func):
+        """Decorates a function or method.
 
         Parameters
         ----------
@@ -153,6 +203,7 @@ class type_checked():
             return result
 
         return decorated
+
 
     @staticmethod
     def __is_suitable_annotation(annotation):
