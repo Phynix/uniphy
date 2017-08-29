@@ -1,11 +1,7 @@
-#sudo: required
-#dist: xenial
 language: python
 python:
   - '3.5'
   - '3.6'
-#virtualenv:
-#  system_site_packages: true
 before_install:
   - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O anaconda.sh;
   - bash anaconda.sh -b -p $HOME/anaconda
@@ -32,8 +28,9 @@ deploy:
   provider: pypi
   user: phynix
   password:
-    # secure password for pip
-    secure: "l1RyZcmRd8yRCcAoB9xu2Za1qyrJC63MLl53l7TcfKhatYLPLRsw6oMXAUXCXmmh3giCxi6J6yfYQOmxq1b+bQjL/R8oddmA8YNO6yd0UU95VYeyPmcw7DU4X2eW4GuWNmKIZpr+x+/4ENM7/RINtQO6EUWYZ3XtU4lshTo7DB2uj6Eke2CAv7L/FCDxdtvWWeDtTuytn3KPo1ch9uheszM/9rKS9Jd8VPTIuOhIgcz+s7AxzmjnMx7/d08XpHz1X5RS0D98hE52EsDMGY+KI77suBUElBsSVGvfzQCY4xkAVKPkLqd+gDLFkMun5S6oScDHfRNcPGMhDcfwjRpWrrWrFXYOx7to0f1kMTlBGXU2H8ZW15i90BwAF9HmOXuo58J54aZg/zKFCtShts/uWptzPIA40ivE1/tAAgt4+vrXcLq2w3wudo8c8TA6ljgBTLvy05nARHeEA70FJbNj3w5Xw2cQJ03SK8cYiq1/E2f7eYfY1ag3Yakm6lYZ9TNxCuXbC2vm8ClfyGYMf0DA50n62dnenSJeYPJ6kO5rGfa/goLs0J2d3fk8++XxTe+d71e2EgedSEwEjI/KXef1Ub/kQob0JZpwmC+Vo6NTuttcKLLkWDr81Ywq3d6zMZoGQQ/1bw94/S3wtynIPsHWeQhXmCNN8tTR65/sb7H7das="
+    secure: "K4sQLzchDacZK5q/fMndLO+max2cMSA+a+TEk3HCl9+ALo99E8ywBEQJPzoSDwC8/7O3HZA884I16pDMpTjX7TBMgvOTGwCGWISdCPJXy7h7exer4VzwU24V48S8cPLBp5Gw/5aMUmDGW9d9btTxccKT0F312DRszyM+uLOPAvdAv9J5FucVXWy87CjdNp3/W1U8N4rzBtsFKbG5zOn/xU4DH/BxwovUs9n/Jl2YC7UxG7dUV4qeY0vucMyhrXRHM9bh4zLxXdtNKoCuPSrE/z5R4qMD588+o/1j5em1TASriynTWQnQLkunJ6J1cZkZ8HRjcFdgK9wRO7Dlf2KAIrhPtl/R1dZVFaeY+QLQQVNTsTHzPrZpp6c+mdPk8GfQhy+oUEQ+4rZMt44WD8AhLZO6aPuM0+0BxLus0qZ+AHUZnJHh0GlmsHoMLBBrx4hf+emCip5EF4lY7lThHNSlnxRXKKoZyUf2njJShzCHQtvm3+keit+N9TfCKhzABGzldjWYDrtSVBCyW5Hvwrm/QICMDXf2r38qcF6+Tiea6IyQjs9Zn38T3/BeJPTHHIpIYP2jKmlvtqkhc3XsXAcTx8YF0VnL4gjZAkoVmQ/KoRjxZGHkSDm04CinYPoDgGDumsKomyhgzxWF494Wp1+UOEI8gGcSFsiQOH2C8EpVVDo="
   distributions: sdist bdist_wheel
   on:
     branch: master
+    condition: $TRAVIS_PYTHON_VERSION = "3.6" && $TRAVIS_OS_NAME = "linux"
+
