@@ -21,7 +21,7 @@ def readme():
 
 
 setup(name='uniphy',
-      version='0.0.1',  # TODO: automatise versioning
+      version='0.0.2',  # TODO: automatise versioning
       description='Unification and collection of algorithms used in physics',
       long_description=readme(),
       classifiers=[
