@@ -1,0 +1,401 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tests.test_decorators module &mdash; uniphy 0.0.4-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="uniphy 0.0.4-dev documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> uniphy
+          
+
+          
+            
+            <img src="_static/phynix_Y_nicer_eyes_shorten_throat_higher_mouth_v03_whitebk.jpeg" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.4-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="uniphy.html">uniphy package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">uniphy</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>tests.test_decorators module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/tests.test_decorators.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-tests.test_decorators">
+<span id="tests-test-decorators-module"></span><h1>tests.test_decorators module<a class="headerlink" href="#module-tests.test_decorators" title="Permalink to this headline">¶</a></h1>
+<p>Created on Sat Jul 29 00:15:42 2017</p>
+<p>&#64;author: Johannes Lade</p>
+<dl class="class">
+<dt id="tests.test_decorators.TestTypeChecked">
+<em class="property">class </em><code class="descclassname">tests.test_decorators.</code><code class="descname">TestTypeChecked</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">unittest.case.TestCase</span></code></p>
+<p>Create an instance of the class that will use the named test
+method when executed. Raises a ValueError if the instance does
+not have a method with the specified name.</p>
+<dl class="staticmethod">
+<dt id="tests.test_decorators.TestTypeChecked.generic_testing_function">
+<em class="property">static </em><code class="descname">generic_testing_function</code><span class="sig-paren">(</span><em>a</em>, <em>b: str</em>, <em>c=None</em>, <em>d: list = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.generic_testing_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.generic_testing_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic testing function for type_checked decorator.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="tests.test_decorators.TestTypeChecked.setUpClass">
+<em class="property">classmethod </em><code class="descname">setUpClass</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.setUpClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.setUpClass" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_bound_method_correct_annotation">
+<code class="descname">test_bound_method_correct_annotation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_bound_method_correct_annotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_bound_method_correct_annotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test correct annotations for bound methods.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_bound_method_wrong_default_values">
+<code class="descname">test_bound_method_wrong_default_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_bound_method_wrong_default_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_bound_method_wrong_default_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test bound methods with a wrong default value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_bound_method_wrong_return_value">
+<code class="descname">test_bound_method_wrong_return_value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_bound_method_wrong_return_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_bound_method_wrong_return_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test bound method with wrong return value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_class_method_correct_annotation">
+<code class="descname">test_class_method_correct_annotation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_class_method_correct_annotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_class_method_correct_annotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test correct annotations for class methods.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_class_method_wrong_default_values">
+<code class="descname">test_class_method_wrong_default_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_class_method_wrong_default_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_class_method_wrong_default_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test class methods with a wrong default value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_class_method_wrong_return_value">
+<code class="descname">test_class_method_wrong_return_value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_class_method_wrong_return_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_class_method_wrong_return_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test class method with wrong return value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_decorating_class_method_raises_type_error">
+<code class="descname">test_decorating_class_method_raises_type_error</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_decorating_class_method_raises_type_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_decorating_class_method_raises_type_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_decorating_static_method_raises_type_error">
+<code class="descname">test_decorating_static_method_raises_type_error</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_decorating_static_method_raises_type_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_decorating_static_method_raises_type_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_decorator_arguments_keyword_only">
+<code class="descname">test_decorator_arguments_keyword_only</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_decorator_arguments_keyword_only"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_decorator_arguments_keyword_only" title="Permalink to this definition">¶</a></dt>
+<dd><p>“Test whether keyword arguments work for decorator</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_decorator_arguments_no_arguments">
+<code class="descname">test_decorator_arguments_no_arguments</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_decorator_arguments_no_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_decorator_arguments_no_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether &#64;type_checked is the same as &#64;type_checked()</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_decorator_arguments_positional_and_keyword">
+<code class="descname">test_decorator_arguments_positional_and_keyword</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_decorator_arguments_positional_and_keyword"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_decorator_arguments_positional_and_keyword" title="Permalink to this definition">¶</a></dt>
+<dd><p>“Test whether positional and keyword arguments mixed work for decorator</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_decorator_arguments_positional_only">
+<code class="descname">test_decorator_arguments_positional_only</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_decorator_arguments_positional_only"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_decorator_arguments_positional_only" title="Permalink to this definition">¶</a></dt>
+<dd><p>“Test whether positional arguments work for decorator</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_decorator_arguments_wrong_arguments">
+<code class="descname">test_decorator_arguments_wrong_arguments</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_decorator_arguments_wrong_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_decorator_arguments_wrong_arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_keep_annotation_metadata">
+<code class="descname">test_keep_annotation_metadata</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_keep_annotation_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_keep_annotation_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that annotation metadata is not influenced.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="tests.test_decorators.TestTypeChecked.test_not_type_annotation">
+<em class="property">static </em><code class="descname">test_not_type_annotation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_not_type_annotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_not_type_annotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that annotations that are not a type are being ignored.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_only_kwarg_no_defaults_correct_arguments">
+<code class="descname">test_only_kwarg_no_defaults_correct_arguments</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_only_kwarg_no_defaults_correct_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_only_kwarg_no_defaults_correct_arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_only_kwarg_no_defaults_wrong_arguments">
+<code class="descname">test_only_kwarg_no_defaults_wrong_arguments</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_only_kwarg_no_defaults_wrong_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_only_kwarg_no_defaults_wrong_arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_only_kwarg_with_defaults_correct_arguments">
+<code class="descname">test_only_kwarg_with_defaults_correct_arguments</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_only_kwarg_with_defaults_correct_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_only_kwarg_with_defaults_correct_arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_only_kwarg_with_defaults_wrong_arguments">
+<code class="descname">test_only_kwarg_with_defaults_wrong_arguments</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_only_kwarg_with_defaults_wrong_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_only_kwarg_with_defaults_wrong_arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_only_positional_no_defaults_correct_arguments">
+<code class="descname">test_only_positional_no_defaults_correct_arguments</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_only_positional_no_defaults_correct_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_only_positional_no_defaults_correct_arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_only_positional_no_defaults_wrong_arguments">
+<code class="descname">test_only_positional_no_defaults_wrong_arguments</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_only_positional_no_defaults_wrong_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_only_positional_no_defaults_wrong_arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_only_positional_with_defaults_correct_arguments">
+<code class="descname">test_only_positional_with_defaults_correct_arguments</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_only_positional_with_defaults_correct_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_only_positional_with_defaults_correct_arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_only_positional_with_defaults_wrong_arguments">
+<code class="descname">test_only_positional_with_defaults_wrong_arguments</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_only_positional_with_defaults_wrong_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_only_positional_with_defaults_wrong_arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="tests.test_decorators.TestTypeChecked.test_return_correct">
+<em class="property">static </em><code class="descname">test_return_correct</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_return_correct"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_return_correct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raise no exception when return type is correct.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_return_incorrect">
+<code class="descname">test_return_incorrect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_return_incorrect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_return_incorrect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raise TypeError when return type incorrect.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="tests.test_decorators.TestTypeChecked.test_works_with_args_kwargs">
+<em class="property">static </em><code class="descname">test_works_with_args_kwargs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_works_with_args_kwargs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_works_with_args_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that <a href="#id1"><span class="problematic" id="id2">*</span></a>args and <a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs are ignored.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_decorators.TestTypeChecked.test_wrong_default_arguments">
+<code class="descname">test_wrong_default_arguments</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tests/test_decorators.html#TestTypeChecked.test_wrong_default_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_decorators.TestTypeChecked.test_wrong_default_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if wrong default arguments raise TypeError at function definition.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Jonas Eschle, Johannes Lade.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.4-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

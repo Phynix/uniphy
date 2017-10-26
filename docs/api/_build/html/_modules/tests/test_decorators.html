@@ -1,0 +1,545 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tests.test_decorators &mdash; uniphy 0.0.4-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="uniphy 0.0.4-dev documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> uniphy
+          
+
+          
+            
+            <img src="../../_static/phynix_Y_nicer_eyes_shorten_throat_higher_mouth_v03_whitebk.jpeg" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.4-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../uniphy.html">uniphy package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uniphy</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>tests.test_decorators</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for tests.test_decorators</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Sat Jul 29 00:15:42 2017</span>
+
+<span class="sd">@author: Johannes Lade</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+
+<span class="kn">from</span> <span class="nn">uniphy</span> <span class="k">import</span> <span class="n">decorators</span>
+
+
+<div class="viewcode-block" id="TestTypeChecked"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked">[docs]</a><span class="k">class</span> <span class="nc">TestTypeChecked</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestTypeChecked.setUpClass"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.setUpClass">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">setUpClass</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">decorator_arg_type_err_regex</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;^Illegal decorator arguments: args=\(.{0,}?\), kwargs={.{0,}?}$&#39;</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">default_type_error_regex</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;^default argument .{1,}? is not instance of .{2,}?$&#39;</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">argument_type_error_regex</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;^argument .{1,}? is not instance of .{2,}?$&#39;</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">return_type_error_regex</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;^expected .{2,}?, returned .{2,}?$&#39;</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">correct_args</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[])</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">correct_kwargs</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="p">[],</span> <span class="n">d</span><span class="o">=</span><span class="p">[])</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.generic_testing_function"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.generic_testing_function">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="nd">@decorators</span><span class="o">.</span><span class="n">type_checked</span>
+    <span class="k">def</span> <span class="nf">generic_testing_function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generic testing function for type_checked decorator.&quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_return_correct"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_return_correct">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">test_return_correct</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Raise no exception when return type is correct.&quot;&quot;&quot;</span>
+
+        <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+        <span class="nd">@decorators</span><span class="o">.</span><span class="n">type_checked</span>
+        <span class="k">def</span> <span class="nf">a</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+
+        <span class="n">a</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_return_incorrect"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_return_incorrect">[docs]</a>    <span class="k">def</span> <span class="nf">test_return_incorrect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Raise TypeError when return type incorrect.&quot;&quot;&quot;</span>
+
+        <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+        <span class="nd">@decorators</span><span class="o">.</span><span class="n">type_checked</span>
+        <span class="k">def</span> <span class="nf">a</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;hello&quot;</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_type_error_regex</span><span class="p">):</span>
+            <span class="n">a</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_not_type_annotation"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_not_type_annotation">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">test_not_type_annotation</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Test that annotations that are not a type are being ignored.&quot;&quot;&quot;</span>
+        <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+        <span class="nd">@decorators</span><span class="o">.</span><span class="n">type_checked</span>
+        <span class="k">def</span> <span class="nf">nonsense_annotation</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="s2">&quot;nonsense&quot;</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="mi">1</span><span class="o">*</span><span class="mi">1</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;more_nonsense&#39;</span><span class="p">):</span>
+            <span class="k">pass</span>
+        <span class="n">nonsense_annotation</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_only_positional_no_defaults_correct_arguments"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_only_positional_no_defaults_correct_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">test_only_positional_no_defaults_correct_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generic_testing_function</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">correct_args</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_only_positional_no_defaults_wrong_arguments"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_only_positional_no_defaults_wrong_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">test_only_positional_no_defaults_wrong_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">faulty_args</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[]),</span>  <span class="c1"># first annotation wrong</span>
+            <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="p">[],</span> <span class="mi">1</span><span class="p">),</span>  <span class="c1"># second annotation wrong</span>
+            <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># both annotations wrong</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">failure</span> <span class="ow">in</span> <span class="n">faulty_args</span><span class="p">:</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">subTest</span><span class="p">(</span><span class="n">failure</span><span class="o">=</span><span class="n">failure</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span>
+                                                                       <span class="bp">self</span><span class="o">.</span><span class="n">argument_type_error_regex</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">generic_testing_function</span><span class="p">(</span><span class="o">*</span><span class="n">failure</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_only_positional_with_defaults_correct_arguments"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_only_positional_with_defaults_correct_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">test_only_positional_with_defaults_correct_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generic_testing_function</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">correct_args</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_only_positional_with_defaults_wrong_arguments"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_only_positional_with_defaults_wrong_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">test_only_positional_with_defaults_wrong_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">argument_type_error_regex</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">generic_testing_function</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_only_kwarg_no_defaults_correct_arguments"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_only_kwarg_no_defaults_correct_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">test_only_kwarg_no_defaults_correct_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generic_testing_function</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">correct_kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_only_kwarg_no_defaults_wrong_arguments"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_only_kwarg_no_defaults_wrong_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">test_only_kwarg_no_defaults_wrong_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">faulty_kwargs</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">OrderedDict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="p">[],</span> <span class="n">d</span><span class="o">=</span><span class="p">[]),</span>  <span class="c1"># first annotation wrong</span>
+            <span class="n">OrderedDict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="p">[],</span> <span class="n">d</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>  <span class="c1"># second annotation wrong</span>
+            <span class="n">OrderedDict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>  <span class="c1"># both annotations wrong</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">failure</span> <span class="ow">in</span> <span class="n">faulty_kwargs</span><span class="p">:</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">subTest</span><span class="p">(</span><span class="n">failure</span><span class="o">=</span><span class="n">failure</span><span class="p">),</span> \
+                 <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">argument_type_error_regex</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">generic_testing_function</span><span class="p">(</span><span class="o">**</span><span class="n">failure</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_only_kwarg_with_defaults_correct_arguments"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_only_kwarg_with_defaults_correct_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">test_only_kwarg_with_defaults_correct_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">correct</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">correct_kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">del</span> <span class="n">correct</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span>
+        <span class="k">del</span> <span class="n">correct</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generic_testing_function</span><span class="p">(</span><span class="o">**</span><span class="n">correct</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_only_kwarg_with_defaults_wrong_arguments"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_only_kwarg_with_defaults_wrong_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">test_only_kwarg_with_defaults_wrong_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">argument_type_error_regex</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">generic_testing_function</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_keep_annotation_metadata"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_keep_annotation_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">test_keep_annotation_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test that annotation metadata is not influenced.&quot;&quot;&quot;</span>
+
+        <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+        <span class="k">def</span> <span class="nf">naked_function</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="k">pass</span>
+
+        <span class="n">decorated_function</span> <span class="o">=</span> <span class="n">decorators</span><span class="o">.</span><span class="n">type_checked</span><span class="p">(</span><span class="n">naked_function</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">naked_function</span><span class="o">.</span><span class="vm">__annotations__</span><span class="p">,</span> <span class="n">decorated_function</span><span class="o">.</span><span class="vm">__annotations__</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_wrong_default_arguments"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_wrong_default_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">test_wrong_default_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test if wrong default arguments raise TypeError at function definition.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_type_error_regex</span><span class="p">):</span>
+            <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+            <span class="nd">@decorators</span><span class="o">.</span><span class="n">type_checked</span>
+            <span class="k">def</span> <span class="nf">wrong_default</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span><span class="p">):</span>
+                <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_works_with_args_kwargs"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_works_with_args_kwargs">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">test_works_with_args_kwargs</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Test that *args and **kwargs are ignored.&quot;&quot;&quot;</span>
+
+        <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+        <span class="nd">@decorators</span><span class="o">.</span><span class="n">type_checked</span>
+        <span class="k">def</span> <span class="nf">ignore_args_kwargs</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">pass</span>
+
+        <span class="n">ignore_args_kwargs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span></div>
+
+    <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+<div class="viewcode-block" id="TestTypeChecked.test_bound_method_correct_annotation"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_bound_method_correct_annotation">[docs]</a>    <span class="k">def</span> <span class="nf">test_bound_method_correct_annotation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test correct annotations for bound methods.&quot;&quot;&quot;</span>
+
+        <span class="c1"># noinspection PyRedundantParentheses</span>
+        <span class="k">class</span> <span class="nc">CorrectAnnotation</span><span class="p">():</span>
+            <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+            <span class="nd">@decorators</span><span class="o">.</span><span class="n">type_checked</span>
+            <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="k">pass</span>
+
+        <span class="n">foo</span> <span class="o">=</span> <span class="n">CorrectAnnotation</span><span class="p">()</span>
+        <span class="c1"># Call with correct argument.</span>
+        <span class="n">foo</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># Call with wrong argument.</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">argument_type_error_regex</span><span class="p">):</span>
+            <span class="n">foo</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+<div class="viewcode-block" id="TestTypeChecked.test_bound_method_wrong_return_value"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_bound_method_wrong_return_value">[docs]</a>    <span class="k">def</span> <span class="nf">test_bound_method_wrong_return_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test bound method with wrong return value.&quot;&quot;&quot;</span>
+
+        <span class="c1"># noinspection PyRedundantParentheses</span>
+        <span class="k">class</span> <span class="nc">WrongReturnValue</span><span class="p">():</span>
+            <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+            <span class="nd">@decorators</span><span class="o">.</span><span class="n">type_checked</span>
+            <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;hello&quot;</span>
+
+        <span class="n">foo</span> <span class="o">=</span> <span class="n">WrongReturnValue</span><span class="p">()</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_type_error_regex</span><span class="p">):</span>
+            <span class="n">foo</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span></div>
+
+    <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+<div class="viewcode-block" id="TestTypeChecked.test_bound_method_wrong_default_values"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_bound_method_wrong_default_values">[docs]</a>    <span class="k">def</span> <span class="nf">test_bound_method_wrong_default_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test bound methods with a wrong default value.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_type_error_regex</span><span class="p">):</span>
+            <span class="c1"># noinspection PyRedundantParentheses</span>
+            <span class="k">class</span> <span class="nc">WrongDefaultValue</span><span class="p">():</span>
+                <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+                <span class="nd">@decorators</span><span class="o">.</span><span class="n">type_checked</span>
+                <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span><span class="p">):</span>
+                    <span class="k">pass</span></div>
+
+    <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+<div class="viewcode-block" id="TestTypeChecked.test_class_method_correct_annotation"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_class_method_correct_annotation">[docs]</a>    <span class="k">def</span> <span class="nf">test_class_method_correct_annotation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test correct annotations for class methods.&quot;&quot;&quot;</span>
+
+        <span class="c1"># noinspection PyRedundantParentheses</span>
+        <span class="k">class</span> <span class="nc">CorrectAnnotation</span><span class="p">():</span>
+            <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+            <span class="nd">@classmethod</span>
+            <span class="nd">@decorators</span><span class="o">.</span><span class="n">type_checked</span>
+            <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="k">pass</span>
+
+        <span class="c1"># Call with correct argument.</span>
+        <span class="n">CorrectAnnotation</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># Call with wrong argument.</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">argument_type_error_regex</span><span class="p">):</span>
+            <span class="n">CorrectAnnotation</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+<div class="viewcode-block" id="TestTypeChecked.test_class_method_wrong_return_value"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_class_method_wrong_return_value">[docs]</a>    <span class="k">def</span> <span class="nf">test_class_method_wrong_return_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test class method with wrong return value.&quot;&quot;&quot;</span>
+
+        <span class="c1"># noinspection PyRedundantParentheses</span>
+        <span class="k">class</span> <span class="nc">WrongReturnValue</span><span class="p">():</span>
+            <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+            <span class="nd">@classmethod</span>
+            <span class="nd">@decorators</span><span class="o">.</span><span class="n">type_checked</span>
+            <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;hello&quot;</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_type_error_regex</span><span class="p">):</span>
+            <span class="n">WrongReturnValue</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span></div>
+
+    <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+<div class="viewcode-block" id="TestTypeChecked.test_class_method_wrong_default_values"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_class_method_wrong_default_values">[docs]</a>    <span class="k">def</span> <span class="nf">test_class_method_wrong_default_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test class methods with a wrong default value.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_type_error_regex</span><span class="p">):</span>
+            <span class="c1"># noinspection PyRedundantParentheses</span>
+            <span class="k">class</span> <span class="nc">WrongDefaultValue</span><span class="p">():</span>
+                <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+                <span class="nd">@classmethod</span>
+                <span class="nd">@decorators</span><span class="o">.</span><span class="n">type_checked</span>
+                <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span><span class="p">):</span>
+                    <span class="k">pass</span></div>
+
+    <span class="c1"># def test_static_method(self):</span>
+    <span class="c1">#     # Not tested yet because in principle equivalent to normal function.</span>
+
+<div class="viewcode-block" id="TestTypeChecked.test_decorator_arguments_no_arguments"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_decorator_arguments_no_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">test_decorator_arguments_no_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test whether @type_checked is the same as @type_checked()&quot;&quot;&quot;</span>
+
+        <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+        <span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+            <span class="k">pass</span>
+
+        <span class="c1"># @type_checked</span>
+        <span class="n">decorated_without_brackets</span> <span class="o">=</span> <span class="n">decorators</span><span class="o">.</span><span class="n">type_checked</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
+        <span class="c1"># @type_checked()</span>
+        <span class="n">decorated_with_brackets</span> <span class="o">=</span> <span class="n">decorators</span><span class="o">.</span><span class="n">type_checked</span><span class="p">()(</span><span class="n">foo</span><span class="p">)</span>
+        <span class="c1"># Test that same</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">decorated_without_brackets</span><span class="o">.</span><span class="n">__wrapped__</span><span class="p">,</span> <span class="n">decorated_with_brackets</span><span class="o">.</span><span class="n">__wrapped__</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_decorator_arguments_positional_only"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_decorator_arguments_positional_only">[docs]</a>    <span class="k">def</span> <span class="nf">test_decorator_arguments_positional_only</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;&quot;Test whether positional arguments work for decorator&quot;&quot;&quot;</span>
+
+        <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+        <span class="nd">@decorators</span><span class="o">.</span><span class="n">type_checked</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mf">2.3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;hello&quot;</span>
+
+        <span class="c1"># Check all functionality turned off.</span>
+        <span class="n">foo</span><span class="p">(</span><span class="mf">2.3</span><span class="p">)</span>
+
+        <span class="c1"># Check only some functionality turned off.</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">decorators</span><span class="o">.</span><span class="n">type_checked</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)(</span><span class="n">foo</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_decorator_arguments_keyword_only"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_decorator_arguments_keyword_only">[docs]</a>    <span class="k">def</span> <span class="nf">test_decorator_arguments_keyword_only</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;&quot;Test whether keyword arguments work for decorator&quot;&quot;&quot;</span>
+
+        <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+        <span class="nd">@decorators</span><span class="o">.</span><span class="n">type_checked</span><span class="p">(</span><span class="n">check_arguments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">check_defaults</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">check_return</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mf">2.3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;hello&quot;</span>
+
+        <span class="c1"># Check all functionality turned off.</span>
+        <span class="n">foo</span><span class="p">(</span><span class="mf">2.3</span><span class="p">)</span>
+
+        <span class="c1"># Check only some functionality turned off.</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">decorators</span><span class="o">.</span><span class="n">type_checked</span><span class="p">(</span><span class="n">check_arguments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">check_defaults</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check_return</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">foo</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_decorator_arguments_positional_and_keyword"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_decorator_arguments_positional_and_keyword">[docs]</a>    <span class="k">def</span> <span class="nf">test_decorator_arguments_positional_and_keyword</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;&quot;Test whether positional and keyword arguments mixed work for decorator&quot;&quot;&quot;</span>
+
+        <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+        <span class="nd">@decorators</span><span class="o">.</span><span class="n">type_checked</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="n">check_defaults</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">check_return</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mf">2.3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;hello&quot;</span>
+
+        <span class="c1"># Check all functionality turned off.</span>
+        <span class="n">foo</span><span class="p">(</span><span class="mf">2.3</span><span class="p">)</span>
+
+        <span class="c1"># Check only some functionality turned off.</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">decorators</span><span class="o">.</span><span class="n">type_checked</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="n">check_defaults</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check_return</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">foo</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_decorator_arguments_wrong_arguments"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_decorator_arguments_wrong_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">test_decorator_arguments_wrong_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+        <span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+            <span class="k">pass</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">decorator_arg_type_err_regex</span><span class="p">):</span>
+            <span class="n">decorators</span><span class="o">.</span><span class="n">type_checked</span><span class="p">(</span><span class="mi">2</span><span class="p">)(</span><span class="n">foo</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">decorators</span><span class="o">.</span><span class="n">type_checked</span><span class="p">(</span><span class="n">check_arguments</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_decorating_class_method_raises_type_error"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_decorating_class_method_raises_type_error">[docs]</a>    <span class="k">def</span> <span class="nf">test_decorating_class_method_raises_type_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+        <span class="nd">@classmethod</span>
+        <span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+            <span class="k">pass</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">decorator_arg_type_err_regex</span><span class="p">):</span>
+            <span class="n">decorators</span><span class="o">.</span><span class="n">type_checked</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestTypeChecked.test_decorating_static_method_raises_type_error"><a class="viewcode-back" href="../../tests.test_decorators.html#tests.test_decorators.TestTypeChecked.test_decorating_static_method_raises_type_error">[docs]</a>    <span class="k">def</span> <span class="nf">test_decorating_static_method_raises_type_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+        <span class="nd">@staticmethod</span>
+        <span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+            <span class="k">pass</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">decorator_arg_type_err_regex</span><span class="p">):</span>
+            <span class="n">decorators</span><span class="o">.</span><span class="n">type_checked</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Jonas Eschle, Johannes Lade.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.0.4-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,290 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>decorators &mdash; uniphy 0.0.4-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="uniphy 0.0.4-dev documentation" href="index.html"/>
+        <link rel="up" title="uniphy package" href="uniphy.html"/>
+        <link rel="prev" title="uniphy package" href="uniphy.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> uniphy
+          
+
+          
+            
+            <img src="_static/phynix_Y_nicer_eyes_shorten_throat_higher_mouth_v03_whitebk.jpeg" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.4-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="uniphy.html">uniphy package</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">decorators</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">uniphy</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="uniphy.html">uniphy package</a> &raquo;</li>
+        
+      <li>decorators</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/uniphy.decorators.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-uniphy.decorators">
+<span id="decorators"></span><h1>decorators<a class="headerlink" href="#module-uniphy.decorators" title="Permalink to this headline">¶</a></h1>
+<p>Created on Tue Jul 25 23:05:04 2017</p>
+<p>&#64;author: Johannes Lade, Jonas Eschle ‘Mayou36’</p>
+<dl class="class">
+<dt id="uniphy.decorators.type_checked">
+<em class="property">class </em><code class="descclassname">uniphy.decorators.</code><code class="descname">type_checked</code><span class="sig-paren">(</span><em>check_arguments=True</em>, <em>check_defaults=True</em>, <em>check_return=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uniphy/decorators.html#type_checked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uniphy.decorators.type_checked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Decorator for dynamic type checking with annotations.</p>
+<ul class="simple">
+<li>Decorates functions, static methods and bound methods.</li>
+<li>Each Parameter and the return value can be annotated with one expression of &lt;class ‘type’&gt;.</li>
+<li>Other expressions or missing annotations are ignored.</li>
+<li>Default values are type checked once when the function is decorated.</li>
+<li>All other annotations are checked once per function call.</li>
+<li>Type checking of arguments, default values or the return value can be turned off separately.</li>
+<li>Annotations for <a href="#id1"><span class="problematic" id="id2">*</span></a>args and <a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs are ignored.</li>
+<li>The effect of this decorator is turned of if __debug__ == False i.e. if python is run with the</li>
+</ul>
+<p>option -O.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@type_checked</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span> <span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@type_checked</span><span class="p">(</span><span class="n">check_defaults</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="n">a</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mf">3.2</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@type_checked</span><span class="p">()</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">knu</span><span class="p">(</span><span class="n">a</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mf">3.2</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+<span class="gt">Traceback (most recent call last):</span>
+    <span class="o">...</span>
+<span class="gr">TypeError</span>: <span class="n">default argument a = 3.2 is not instance of &lt;class &#39;int&#39;&gt;</span>
+</pre></div>
+</div>
+<p>Set decorator arguments.</p>
+<dl class="docutils">
+<dt>check_arguments <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd>Decides whether arguments should be checked at execution time.</dd>
+<dt>check_defaults <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd>Decides whether default values should be checked at declaration.</dd>
+<dt>check_return <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd>Decides whether the return value should be checked at execution time.</dd>
+</dl>
+<dl class="attribute">
+<dt id="uniphy.decorators.type_checked.ALLOWED_PARAMETER_KINDS">
+<code class="descname">ALLOWED_PARAMETER_KINDS</code><em class="property"> = (&lt;_ParameterKind.POSITIONAL_ONLY: 0&gt;, &lt;_ParameterKind.KEYWORD_ONLY: 3&gt;, &lt;_ParameterKind.POSITIONAL_OR_KEYWORD: 1&gt;)</em><a class="headerlink" href="#uniphy.decorators.type_checked.ALLOWED_PARAMETER_KINDS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="uniphy.html" class="btn btn-neutral" title="uniphy package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Jonas Eschle, Johannes Lade.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.4-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

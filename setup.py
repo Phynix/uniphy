@@ -16,7 +16,7 @@ with io.open(os.path.join(current_dir, 'requirements.txt')) as f:
 
 def readme():
     """Open README.md, read the file and return it as a string"""
-    with open('README.md') as readme:
+    with open(os.path.join(current_dir, 'README.md')) as readme:
         return readme.read()
 
 
