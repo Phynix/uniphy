@@ -19,9 +19,11 @@ install:
 
   - pip install -U -r requirements.txt
   - pip install . --no-dependencies
+  
 script:
  - coverage run -m unittest discover
  - python -m doctest uniphy/*.py
+ 
 after_success:
   - coveralls
 deploy:
