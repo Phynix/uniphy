@@ -40,7 +40,7 @@ setup(name='uniphy',
           'Topic :: Scientific/Engineering :: Physics',
           'Topic :: Scientific/Engineering :: Information Analysis',
           'Topic :: Scientific/Engineering :: Mathematics'
-      ],
+          ],
       keywords='physics, analysis, algorithm',
       url='https://github.com/Phynix/uniphy',
       author='Jonas Eschle',
