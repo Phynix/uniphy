@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Setup of uniphy
+Setup of uniphy.
 """
 
 from setuptools import setup
@@ -15,8 +15,8 @@ with io.open(os.path.join(current_dir, 'requirements.txt')) as f:
 
 
 def readme():
-    """Open README.md, read the file and return it as a string"""
-    with open('README.md') as readme:
+    """Open README.md, read the file and return it as a string."""
+    with open('README.rst') as readme:
         return readme.read()
 
 
