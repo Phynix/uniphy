@@ -37,7 +37,7 @@ autoclass_content = 'both'
 
 # General information about the project.
 project = 'uniphy'
-copyright_ = '2017, Jonas Eschle, Johannes Lade'
+copyright = '2017, Jonas Eschle, Johannes Lade'
 author = 'Jonas Eschle, Johannes Lade'
 
 
@@ -48,6 +48,7 @@ html_theme = "sphinx_rtd_theme"
 
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
+# TODO: change logo path
 html_logo = '/home/jonas/Documents/Phynix/general/logo/nicer_eyes/phynix_Y_nicer_eyes_shorten_throat_higher_mouth_v03_whitebk.jpeg'
 
 # Napoleon settings
@@ -213,7 +214,7 @@ texinfo_documents = [
 epub_title = project
 epub_author = author
 epub_publisher = author
-epub_copyright = copyright_
+epub_copyright = copyright
 
 # The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
