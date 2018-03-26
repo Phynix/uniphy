@@ -37,7 +37,7 @@ autoclass_content = 'both'
 
 # General information about the project.
 project = 'uniphy'
-copyright = '2017, Jonas Eschle, Johannes Lade'
+copyright_ = '2017, Jonas Eschle, Johannes Lade'
 author = 'Jonas Eschle, Johannes Lade'
 
 
@@ -213,7 +213,7 @@ texinfo_documents = [
 epub_title = project
 epub_author = author
 epub_publisher = author
-epub_copyright = copyright
+epub_copyright = copyright_
 
 # The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
