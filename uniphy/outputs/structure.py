@@ -23,3 +23,9 @@ def to_internal_position(position):
         position = [position]
     position = collections.deque(position)
     return position
+
+
+class SectionPosition():
+
+    def __init__(self):
+        pass
