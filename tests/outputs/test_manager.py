@@ -5,7 +5,7 @@ import uniphy as up
 class TestOutputManager(unittest.TestCase):
 
 
-    def test_creaton(self):
+    def test_creation(self):
         import uniphy.outputs.handler
         default_out = up.output()
         self.assertIsInstance(default_out, up.outputs.handler.Output)

@@ -22,8 +22,8 @@ class Output():
         if self.name is not None:
             self.p(name, layout=self.formatter.title_by_rank[self.level])
 
-    def p(self, *values, sep=' ', end='\n', file=None, flush=True, layout=None, nice=5,
-              nice_save=None):
+    def p(self, *values, sep=' ', end='\n', file=None, flush=True, layout=None, tags=None,
+          nice=5, nice_save=None):
         """
 
         Parameters
@@ -36,6 +36,8 @@ class Output():
         layout : str or callable (with print signature)
             The layout of the values. Can be 'title', 'subtitle' etc or a callable taking
             the arguments `values`, `sep` and `end`.
+        tags : iterable
+            Tags that better describe the output like 'fit', 'result', 'info'...
         nice : int
             If the verbosity >= nice, then the normal print function is invoked.
         nice_save : int (default is = nice)
@@ -44,9 +46,9 @@ class Output():
         nice_save = nice if nice_save is None else nice_save
 
         self.output_raw.append({'values': values, 'sep': sep, 'end': end,
-                                                'file': file, 'flush': flush,
-                                                'layout': layout, 'nice': nice,
-                                                'nice_save': nice_save})
+                                'file': file, 'flush': flush,
+                                'layout': layout, 'nice': nice, 'tags': tags,
+                                'nice_save': nice_save})
 
         do_print = self.verbosity >= nice  # TODO: determine if to print or not
         if do_print:
@@ -65,4 +67,3 @@ class Output():
 
     def save(self, file, verbosity_save):
         pass
-
