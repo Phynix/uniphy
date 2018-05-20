@@ -26,6 +26,7 @@ def dummy_title_formatter(*args, sep, end):
     text = text.replace(sep, '', 1)  # remove leading `sep`
     return text
 
+
 class Formatter(FormatterBase):
 
     def __init__(self):

@@ -47,15 +47,15 @@ class Output():
 
         self.output_raw.append({'values': values, 'sep': sep, 'end': end,
                                 'file': file, 'flush': flush,
-                                'layout': layout, 'nice': nice, 'tags': tags,
-                                'nice_save': nice_save})
+                                'layout': layout, 'tags': tags,
+                                'nice': nice, 'nice_save': nice_save})
 
         do_print = self.verbosity >= nice  # TODO: determine if to print or not
         if do_print:
             print(*values, sep=sep, end=end, file=file, flush=flush)
 
     if sys.version_info[0] > 2:
-        print = p  # creating alias for `print`
+        print = p  # creating alias for `p`
 
     def section(self, name=None, number=None):
         section = self.sections[number]
