@@ -33,3 +33,10 @@ class Formatter(FormatterBase):
         super().__init__()
 
         self.title_by_rank = [dummy_title_formatter for _ in range(10)]
+
+    def to_string(self, output_raw):
+        concat_str = ''
+        for output in output_raw:
+            concat_str += output['sep'].join([str(o) for o in output['values']])
+            concat_str += output['end']
+        return concat_str

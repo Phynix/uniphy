@@ -10,6 +10,7 @@ class Output():
     verbosity = 5
     verbosity_save = 5
     default_formatter = Formatter
+    __TOP_LEVEL = 0
 
     def __init__(self, name=None, level=0, formatter=None):
         self.name = name
@@ -17,10 +18,27 @@ class Output():
         self.formatter = Formatter() if formatter is None else formatter
         self.sections = SectionHolder()
         self.output_raw = []
-        self.current_section = self
+        self.cur_sec = self
 
-        if self.name is not None:
-            self.p(name, layout=self.formatter.title_by_rank[self.level])
+        # if self.name is not None:
+        #     self.cur_sec.p(name, layout=self.formatter.title_by_rank[self.level])
+
+    @property
+    def top_level_section(self):
+        return self.level == self.__TOP_LEVEL
+
+    @property
+    def cur_sec(self):
+        if self.top_level_section and self._cur_sec is self:
+            self.section()
+        return self._cur_sec
+
+    @cur_sec.setter
+    def cur_sec(self, section):
+        self._cur_sec = section
+
+    def _reset_to_self(self):
+        self.cur_sec = self
 
     def p(self, *values, sep=' ', end='\n', file=None, flush=True, layout=None, tags=None,
           nice=5, nice_save=None):
@@ -45,12 +63,12 @@ class Output():
         """
         nice_save = nice if nice_save is None else nice_save
 
-        self.output_raw.append({'values': values, 'sep': sep, 'end': end,
-                                'file': file, 'flush': flush,
-                                'layout': layout, 'tags': tags,
-                                'nice': nice, 'nice_save': nice_save})
+        self.cur_sec.output_raw.append({'values': values, 'sep': sep, 'end': end,
+                                        'file': file, 'flush': flush,
+                                        'layout': layout, 'tags': tags,
+                                        'nice': nice, 'nice_save': nice_save})
 
-        do_print = self.verbosity >= nice  # TODO: determine if to print or not
+        do_print = self.cur_sec.verbosity >= nice  # TODO: determine if to print or not
         if do_print:
             print(*values, sep=sep, end=end, file=file, flush=flush)
 
@@ -62,8 +80,16 @@ class Output():
         if section is None:
             section = Output(name=name, level=self.level + 1)
             self.sections[number] = section
-        self.current_section = section
+        self.cur_sec = section
         return section
 
     def save(self, file, verbosity_save):
         pass
+
+    def dev_save_str(self):
+        save_str = ''
+        if self.name is not None:
+            save_str += str(self.name) + '\n' + "=" * len(str(self.name))
+        save_str += self.formatter.to_string(self.output_raw)
+        save_str += ' '.join([v.dev_save_str() for _, v in self.sections.items()])
+        return save_str
