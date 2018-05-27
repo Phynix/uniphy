@@ -15,8 +15,8 @@ with io.open(os.path.join(current_dir, 'requirements.txt')) as f:
 
 
 def readme():
-    """Open README.md, read the file and return it as a string."""
-    with open('README.rst') as readme:
+    """Open README.md, read the file and return it as a string"""
+    with open(os.path.join(current_dir, 'README.rst')) as readme:
         return readme.read()
 
 
@@ -40,7 +40,7 @@ setup(name='uniphy',
           'Topic :: Scientific/Engineering :: Physics',
           'Topic :: Scientific/Engineering :: Information Analysis',
           'Topic :: Scientific/Engineering :: Mathematics'
-      ],
+          ],
       keywords='physics, analysis, algorithm',
       url='https://github.com/Phynix/uniphy',
       author='Jonas Eschle',
